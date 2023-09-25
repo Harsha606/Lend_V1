@@ -74,7 +74,7 @@ if selected_opt == 'Predictor App':
                             align='center',
                             valign='bottom' if [probability_of_approval, probability_of_rejection][i] > 50 else 'top',
                         )
-            st.plotly_chart(fig)
+            st.plotly_chart(fig,use_container_width=True)
 if selected_opt =='Defaulter App':
     col1, col2=st.columns([2.8,7.2])
     with col1:
