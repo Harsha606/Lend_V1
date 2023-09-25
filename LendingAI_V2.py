@@ -148,7 +148,7 @@ if selected_opt == 'Recommendation App':
     # Convert Snowflake DataFrames to pandas DataFrames
     trans_id_data = transform_df.to_pandas()
     data=trans_id_data['id'].iloc[:20000]
-    data=data..sort_values(by=['id']
+    data=data.sort_values(by=['id']
     col1,col2,col3=st.columns(3)
     with col2:
             # Create the dropdown
