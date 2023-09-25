@@ -45,7 +45,7 @@ if selected_opt == 'Predictor App':
             age = st.selectbox('Age:', ['< 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
             amount_requested = st.number_input('Loan Amount:', min_value=0,value=1000)
             tenure = st.selectbox('Loan Repayment Tenure:', ['36 Months','60 Months'])
-            btn=st.button("Predict:")
+            btn=st.button("Predict")
     with col2:
         if btn:
             lst = [480, 50, employment_length,loan_title,amount_requested]
@@ -63,7 +63,6 @@ if selected_opt == 'Predictor App':
                 labels={'x': 'Loan', 'y': 'Probability'}
             )
             fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
-            fig.update_layout(title_text='Probability of Loan Approval')
             for i in range(2):
                 fig.add_annotation(
                             x=['Approved', 'Rejected'][i],
@@ -75,7 +74,7 @@ if selected_opt == 'Predictor App':
                             valign='bottom' if [probability_of_approval, probability_of_rejection][i] > 50 else 'top',
                         )
             st.write("")
-            st.write("")
+            st.markdown("<center><b>Probability of Loan Approval</b></center>",unsafe_allow_html=True)
             st.plotly_chart(fig,use_container_width=True)
 if selected_opt =='Defaulter App':
     col1, col2=st.columns([2.8,7.2])
