@@ -45,7 +45,7 @@ if selected_opt == 'Predictor App':
             age = st.selectbox('Age', ['< 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
             amount_requested = st.number_input('Loan Amount', min_value=0,value=1000)
             tenure = st.selectbox('Loan Repayment Tenure', ['36 Months','60 Months'])
-            btn=st.button(":blue[Predict]")
+            btn=st.button("Predict")
     with col2:
         if btn:
             lst = [480, 50, employment_length,loan_title,amount_requested]
@@ -63,7 +63,7 @@ if selected_opt == 'Predictor App':
                 labels={'x': 'Loan', 'y': 'Probability'}
             )
             fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
-            fig.update_layout(title_text='Probability of Loan Approval', width=500)
+            fig.update_layout(title_text='Probability of Loan Approval')
             for i in range(2):
                 fig.add_annotation(
                             x=['Approved', 'Rejected'][i],
