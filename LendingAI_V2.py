@@ -121,8 +121,8 @@ if selected_opt =='Defaulter App':
                     color=['No','Yes'],
                     color_discrete_map = {'Yes': '#00A300', 'No': '#FF4500'},
                     labels={'x': 'Defaulter', 'y': 'Probability'})
-                    fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
-                    fig.update_layout(title_text='Probability of Customer Defaulter',width=500)
+                fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
+                fig.update_layout(title_text='Probability of Customer Defaulter',width=500)
                 for _ in range(6):
                     st.write("")
                 st.plotly_chart(fig,use_container_width=True)
