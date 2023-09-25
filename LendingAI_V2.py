@@ -40,12 +40,12 @@ default_index=0, orientation="horizontal",icons=None,
 if selected_opt == 'Predictor App':
     col1, col2=st.columns([3.2,6.8])
     with col1:
-            employment_length = st.selectbox('Experience', ['< 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10+ years'])
-            loan_title = st.selectbox('Type of Loan', ['Major purchase', 'Debt consolidation', 'Home improvement', 'Moving and relocation', 'Home buying', 'Business', 'Vacation', 'Car financing', 'Medical expenses', 'Credit card refinancing'])
-            age = st.selectbox('Age', ['< 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
-            amount_requested = st.number_input('Loan Amount', min_value=0,value=1000)
-            tenure = st.selectbox('Loan Repayment Tenure', ['36 Months','60 Months'])
-            btn=st.button("Predict")
+            employment_length = st.selectbox('Experience:', ['< 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10+ years'])
+            loan_title = st.selectbox('Type of Loan:', ['Major purchase', 'Debt consolidation', 'Home improvement', 'Moving and relocation', 'Home buying', 'Business', 'Vacation', 'Car financing', 'Medical expenses', 'Credit card refinancing'])
+            age = st.selectbox('Age:', ['< 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
+            amount_requested = st.number_input('Loan Amount:', min_value=0,value=1000)
+            tenure = st.selectbox('Loan Repayment Tenure:', ['36 Months','60 Months'])
+            btn=st.button("Predict:")
     with col2:
         if btn:
             lst = [480, 50, employment_length,loan_title,amount_requested]
@@ -74,6 +74,8 @@ if selected_opt == 'Predictor App':
                             align='center',
                             valign='bottom' if [probability_of_approval, probability_of_rejection][i] > 50 else 'top',
                         )
+            st.write("")
+            st.write("")
             st.plotly_chart(fig,use_container_width=True)
 if selected_opt =='Defaulter App':
     col1, col2=st.columns([2.8,7.2])
