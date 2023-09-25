@@ -40,8 +40,6 @@ default_index=0, orientation="horizontal",icons=None,
 if selected_opt == 'Predictor App':
     col1, col2=st.columns([3.2,6.8])
     with col1:
-        col3,col4=st.columns([3,7])
-        with col3:
             for _ in range(2):
                st.write("") 
             st.write('Experience   :')
@@ -57,15 +55,11 @@ if selected_opt == 'Predictor App':
             for _ in range(3):
                st.write("")
             st.write('Tenure       :')
-        with col4:
             employment_length = st.selectbox('', ['< 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10+ years'])
             loan_title = st.selectbox('', ['Major purchase', 'Debt consolidation', 'Home improvement', 'Moving and relocation', 'Home buying', 'Business', 'Vacation', 'Car financing', 'Medical expenses', 'Credit card refinancing'])
             age = st.selectbox('', ['< 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
             amount_requested = st.number_input('', min_value=0,value=1000)
             tenure = st.selectbox('', ['36 Months','60 Months'])
-        col5,col6,col7=st.columns([1,3,1])
-        with col6:
-            st.write("")
             btn=st.button(':blue[Predict]',use_container_width=True)
     with col2:
         if btn:
