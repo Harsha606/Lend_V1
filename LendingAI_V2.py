@@ -79,47 +79,17 @@ if selected_opt == 'Predictor App':
 if selected_opt =='Defaulter App':
     col1, col2=st.columns([2.8,7.2])
     with col1:
-        col3,col4=st.columns([3.8,6.2])
-        with col3:
-            for _ in range(2):
-               st.write("") 
-            st.write('Loan Amount:')
-            for _ in range(3):
-               st.write("")
-            st.write('Home Ownership:')
-            for _ in range(3):
-               st.write("")
-            st.write('Annual Income:')
-            for _ in range(2):
-               st.write("")
-            st.write('Type of Loan:')
-            for _ in range(3):
-               st.write("")
-            st.write('Interest Rate:')
-            for _ in range(3):
-               st.write("")
-            st.write('Credit Score:')
-            for _ in range(2):
-               st.write("")
-            st.write('Tenure:')
-            for _ in range(2):
-               st.write("")
-            st.write('Experience:')
-        with col4:
-            loan_amnt = st.number_input('',value=10000)
-            home_ownership = st.selectbox('',('OWN', 'RENT', 'MORTGAGE','ANY'))
-            annual_income = st.number_input('', value=120000)
-            loan_type = st.selectbox('',
+            loan_amnt = st.number_input('Loan Amount:',value=10000)
+            home_ownership = st.selectbox('Home Ownership:',('OWN', 'RENT', 'MORTGAGE','ANY'))
+            annual_income = st.number_input('Annnual Income:', value=120000)
+            loan_type = st.selectbox('Type of Loan:',
             ('Credit card refinancing','Debt consolidation','Home improvement','Major purchase','Business','Medical expenses','Moving and relocation','Vacation','Home buying','Green loan','Car financing','Other'))
-            int_rate=st.number_input('',value=10)
-            credit_score=st.number_input('',value=0)
-            term = st.radio("",["36 months", "60 months"],horizontal=True)
+            int_rate=st.number_input('Interest Rate:',value=10)
+            credit_score=st.number_input('Credit Score:',value=0)
+            term = st.radio("Loan Repayment Term:",["36 months", "60 months"],horizontal=True)
             Employee_Expe = ["< 1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10+ years"]
-            emp_lengt = st.select_slider('', options=Employee_Expe)
-        col5,col6,col7=st.columns([1,3,1])
-        with col6:
-            st.write("")
-            btn=st.button(':blue[Check]',use_container_width=True)
+            emp_lengt = st.select_slider('Experience:', options=Employee_Expe)
+            btn=st.button("Check")
     def is_valid_data2(credit_score,loan_amnt,annual_income,int_rate):
         if(0<=credit_score<=900  and loan_amnt>=0 and annual_income>=0 and int_rate>=0):
             return True
