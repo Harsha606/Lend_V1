@@ -40,27 +40,12 @@ default_index=0, orientation="horizontal",icons=None,
 if selected_opt == 'Predictor App':
     col1, col2=st.columns([3.2,6.8])
     with col1:
-            for _ in range(2):
-               st.write("") 
-            st.write('Experience   :')
-            for _ in range(3):
-               st.write("")
-            st.write('Type of Loan :')
-            for _ in range(2):
-               st.write("")
-            st.write('Age          :')
-            for _ in range(3):
-               st.write("")
-            st.write('Loan Amount  :')
-            for _ in range(3):
-               st.write("")
-            st.write('Tenure       :')
-            employment_length = st.selectbox('', ['< 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10+ years'])
-            loan_title = st.selectbox('', ['Major purchase', 'Debt consolidation', 'Home improvement', 'Moving and relocation', 'Home buying', 'Business', 'Vacation', 'Car financing', 'Medical expenses', 'Credit card refinancing'])
-            age = st.selectbox('', ['< 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
-            amount_requested = st.number_input('', min_value=0,value=1000)
-            tenure = st.selectbox('', ['36 Months','60 Months'])
-            btn=st.button(':blue[Predict]')
+            employment_length = st.selectbox('Experience', ['< 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10+ years'])
+            loan_title = st.selectbox('Type of Loan', ['Major purchase', 'Debt consolidation', 'Home improvement', 'Moving and relocation', 'Home buying', 'Business', 'Vacation', 'Car financing', 'Medical expenses', 'Credit card refinancing'])
+            age = st.selectbox('Age', ['< 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
+            amount_requested = st.number_input('Loan Amount', min_value=0,value=1000)
+            tenure = st.selectbox('Loan Repayment Tenure', ['36 Months','60 Months'])
+            btn=st.button(":blue[Predict]")
     with col2:
         if btn:
             lst = [480, 50, employment_length,loan_title,amount_requested]
