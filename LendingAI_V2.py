@@ -178,7 +178,7 @@ if selected_opt == 'Recommendation App':
     INPUT_PRODUCT= filtered_titles
                 #snowflake_array = snowflake_session.to_array(INPUT_PRODUCT)
     snowflake_array=','.join(map(str, INPUT_PRODUCT))
-    k=session.call('LENDINGAI_DB.BASE.SP_RECOMMENDER',snowflake_array)
+    k=session.sql('CALL LENDINGAI_DB.BASE.SP_RECOMMENDER({})'.format(snowflake_array)).collect()
     arr=k.split(',')
     loans=["Business","Medical expenses","Major purchase","Learning and training","Credit card refinancing","Debt consolidation","Car financing","Vacation","Moving and relocation","Green loans","Home improvement","Home buying"]
     loan_images=["business_loan.jpg","medical_expenses_loan.jpg","major_purchase_loan.jpg","learning_loan.jpg","credit_card_refinancing.jpg","debt_consolidation.png","car_financing_loan.png","vacation_loan.png","moving_loan.png","green_loan.jpg","home_improvement.jpg","home_buying_loan.png"]
