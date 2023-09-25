@@ -145,5 +145,5 @@ if selected_opt =='Defaulter App':
 if selected_opt == 'Recommendation App':
     res=session.sql("SELECT CURRENT_USER();").collect()
     st.dataframe(res)
-    res1=session.table("LENDINGAI_DB.BASE.TBL_ID.TABLE")
+    res1=session.table("LENDINGAI_DB.BASE.TBL_ID_TABLE")
     st.dataframe(res1.to_pandas())
