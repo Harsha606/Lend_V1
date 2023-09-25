@@ -5,5 +5,5 @@ connection_parameters = {
 "role": "LENDINGAI_ARL",
 "warehouse": "LENDINGAI_WH",
 "database": "LENDINGAI_DB",
-"schema": "RAW"
+"schema": "BASE"
 }
