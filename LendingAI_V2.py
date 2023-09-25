@@ -146,7 +146,7 @@ if selected_opt == 'Recommendation App':
     # Get data from Snowflake for the tables
     transform_df = session.sql("Select * from LENDINGAI_DB.BASE.TBL_ID_TABLE;").collect()
     # Convert Snowflake DataFrames to pandas DataFrames
-    trans_id_data = transform_df.to_pandas()
+    trans_id_data = pd.DataFrame(transform_df)
     data=trans_id_data['id'].iloc[:100]
     data=data.sort_values(by=['id'])
     col1,col2,col3=st.columns(3)
@@ -217,7 +217,7 @@ if selected_opt=='Segmentation':
     distinct_clusters_df = df.select('"Clusters"').distinct()
     distinct_cluster = [row['Clusters'] for row in distinct_clusters_df.collect()]
     distinct_cluster.insert(0, "All Clusters")
-    distinct_term = df.select("TERM").distinct().collect()
+    distinct_term = ["36 months","60 months"]
     distinct_purpose = df.select("PURPOSE").distinct().collect()
     distinct_home_ownership = df.select("HOME_OWNERSHIP").distinct().collect()
     # Create a row with three columns
