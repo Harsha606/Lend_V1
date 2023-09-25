@@ -144,10 +144,10 @@ if selected_opt =='Defaulter App':
                 st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
     # Get data from Snowflake for the tables
-    transform_df = session.table('LENDINGAI_DB.BASE.TBL_ID_TABLE')
+    #transform_df = session.table('LENDINGAI_DB.BASE.TBL_ID_TABLE')
     # Convert Snowflake DataFrames to pandas DataFrames
-    trans_id_data = transform_df.to_pandas()
-    data=trans_id_data["ID"].iloc[:20]
+    #trans_id_data = transform_df.to_pandas()
+    data="10236"
     col1,col2,col3=st.columns(3)
     with col2:
             # Create the dropdown
