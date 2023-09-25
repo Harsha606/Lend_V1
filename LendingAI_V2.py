@@ -144,7 +144,7 @@ if selected_opt =='Defaulter App':
                 st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
     # Get data from Snowflake for the tables
-    transform_df = session.table("LENDINGAI_DB.BASE.TBL_ID_TABLE")
+    transform_df = session.table("LENDINGAI_DB.BASE.TBL_FILTERED_DATA")
     # Convert Snowflake DataFrames to pandas DataFrames
     trans_id_data = transform_df.to_pandas()
     data=trans_id_data["id"].iloc[:100]
