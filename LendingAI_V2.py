@@ -147,7 +147,7 @@ if selected_opt == 'Recommendation App':
     transform_df = session.table("LENDINGAI_DB.BASE.TBL_ID_TABLE")
     # Convert Snowflake DataFrames to pandas DataFrames
     trans_id_data = transform_df.to_pandas()
-    data=trans_id_data['id'].iloc[:20000]
+    data=trans_id_data['id'].iloc[:100]
     data=data.sort_values(by=['id'])
     col1,col2,col3=st.columns(3)
     with col2:
