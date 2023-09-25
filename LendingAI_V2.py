@@ -144,4 +144,4 @@ if selected_opt =='Defaulter App':
                 st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
     res=session.sql("SELECT CURRENT_USER();")
-    st.dataframe(res)
+    st.dataframe(res.to_pandas())
