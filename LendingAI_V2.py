@@ -60,7 +60,7 @@ if selected_opt == 'Predictor App':
             age = st.selectbox('', ['< 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
             amount_requested = st.number_input('', min_value=0,value=1000)
             tenure = st.selectbox('', ['36 Months','60 Months'])
-            btn=st.button(':blue[Predict]',use_container_width=True)
+            btn=st.button(':blue[Predict]')
     with col2:
         if btn:
             lst = [480, 50, employment_length,loan_title,amount_requested]
@@ -89,11 +89,7 @@ if selected_opt == 'Predictor App':
                             align='center',
                             valign='bottom' if [probability_of_approval, probability_of_rejection][i] > 50 else 'top',
                         )
-            col11,col12,col13=st.columns([1,4,1])
-            with col12:
-                for _ in range(2):
-                    st.write("")
-                st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig)
 if selected_opt =='Defaulter App':
     col1, col2=st.columns([2.8,7.2])
     with col1:
