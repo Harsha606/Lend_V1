@@ -153,9 +153,9 @@ if selected_opt=='Segmentation':
     distinct_clusters_df = df.select('"Clusters"').distinct()
     distinct_cluster = [row['Clusters'] for row in distinct_clusters_df.collect()]
     distinct_cluster.insert(0, "All Clusters")
-    distinct_term = df.select("TERM").distinct().collect()
-    distinct_purpose = df.select("PURPOSE").distinct().collect()
-    distinct_home_ownership = df.select("HOME_OWNERSHIP").distinct().collect()
+    distinct_term = pd.DataFrame(df.select("TERM").distinct().collect())
+    distinct_purpose = pd.DataFrame(df.select("PURPOSE").distinct().collect())
+    distinct_home_ownership = pd.DataFrame(df.select("HOME_OWNERSHIP").distinct().collect())
     # Create a row with three columns
     col1, col2, col3 = st.columns(3)
     # Column 1: Filters
