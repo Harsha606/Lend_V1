@@ -147,7 +147,7 @@ if selected_opt == 'Applications Data':
     col1, col2, col3 = st.columns(3)
     with col1:
         emp_length = st.selectbox("Experience:", ['< 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10+ years'], key="emp_length")
-        debt_to_income_ratio = st.number_input('DTI RATIO:', min_value=0.0, key="debt_to_income_ratio")
+        debt_to_income_ratio = st.number_input('DTI Ratio:', min_value=0.0, key="debt_to_income_ratio")
     with col2:
         amount_requested = st.number_input('Loan Amount:', min_value=0, key="amount_requested")
         loan_title = st.selectbox('Type of Loan:', ['Major purchase', 'Debt consolidation', 'Home improvement', 'Moving and relocation', 'Home buying', 'Business', 'Vacation', 'Car financing', 'Medical expenses', 'Credit card refinancing'], key="loan_title")
