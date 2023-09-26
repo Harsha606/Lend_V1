@@ -146,4 +146,4 @@ if selected_opt == 'Recommendation App':
     # Get data from Snowflake for the tables
     transform_df = session.table("LENDINGAI_DB.BASE.TBL_ID_TABLE")
     # Convert Snowflake DataFrames to pandas DataFrames
-    st.write(tranform_df.to_pandas())
+    st.dataframe(tranform_df.to_pandas())
