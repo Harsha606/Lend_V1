@@ -399,7 +399,7 @@ if selected_opt=='Defaulter Data':
     with col13:
         for _ in range(2):
             st.write("")
-        btn1=st.button(':blue[Get Data]',key='button_cntr7',use_container_width=True)
+        btn1=st.button(':blue[Get Data]',key='button_cntr7')
     def is_valid_data(credit_score,loan_amount,annual_income,int_rate):
         if(0<=credit_score<=900  and loan_amount>=0 and annual_income>=0 and int_rate>=0):
             return True
