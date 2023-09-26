@@ -395,8 +395,8 @@ if selected_opt=='Defaulter Data':
       st.write("")
       appln_type = st.selectbox('Choose desired data for application retrieval:',
       ('None','Retrieve Defaulted Applications ','Retrieve Successful Applications','Retrieve Both Applications'))
-    col11,col12,col13,col14,col15=st.columns(5)
-    with col13:
+    col11,col12,col13,col14,col15,col16,col17,col18,col19=st.columns(9)
+    with col15:
         for _ in range(2):
             st.write("")
         btn1=st.button(':blue[Get Data]',key='button_cntr7')
