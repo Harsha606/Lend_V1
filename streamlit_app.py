@@ -369,3 +369,138 @@ if selected_opt =='Churn Data':
                 st.plotly_chart(fig4)
         else:
             st.error("Entered Invalid data, Please check your Inputs...")
+if selected_opt=='Defaulter Data':
+    col1, col2 ,col3= st.columns(3)
+    with col1:
+      loan_amount = st.number_input('Loan Amount:',value=10000)
+      st.write("")
+      home_ownership = st.selectbox('Current Home Ownership Status:',
+    ('OWN', 'RENT', 'MORTGAGE','ANY'))
+      st.write("")
+      term = st.radio(
+    "Loan Repayment Tenure:",
+    ["36 months", "60 months"])
+    with col2:
+      annual_income = st.number_input('Annual income:', value=120000)
+      st.write("")
+      loan_type = st.selectbox('Type of loan:',
+      ('Credit card refinancing','Debt consolidation','Home improvement','Major purchase','Business','Medical expenses','Moving and relocation','Vacation','Home buying','Green loan','Car financing','Other'))
+      st.write("")
+      Employee_Exp = ["< 1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10+ years"]
+      emp_length = st.select_slider("Experience:", options=Employee_Exp)
+    with col3:
+      int_rate=st.number_input('Interest rate:',value=10)
+      st.write("")
+      credit_score=st.number_input('Credit Score (Optional)',value=0)
+      st.write("")
+      appln_type = st.selectbox('Choose desired data for application retrieval:',
+      ('None','Retrieve Defaulted Applications ','Retrieve Successful Applications','Retrieve Both Applications'))
+    col11,col12,col13,col14,col15=st.columns(5)
+    with col13:
+        for _ in range(2):
+            st.write("")
+        btn1=st.button(':blue[Get Data]',key='button_cntr7',use_container_width=True)
+    def is_valid_data(credit_score,loan_amount,annual_income,int_rate):
+        if(0<=credit_score<=900  and loan_amount>=0 and annual_income>=0 and int_rate>=0):
+            return True
+        return False  
+    if btn1:
+        if is_valid_data(credit_score,loan_amount,annual_income,int_rate):
+            if credit_score==0:
+                risk_score=602
+                if int_rate>20:
+                    risk_score+=80
+                elif 15<=int_rate<20:
+                    risk_score+=60
+                elif 10<=int_rate<15:
+                    risk_score+=30
+                elif 5<=int_rate<10:
+                    risk_score+=10
+            else:
+                risk_score=credit_score
+            lst=[emp_length,int_rate,float(loan_amount),term,home_ownership,float(annual_income),loan_type,risk_score]
+            df=pd.DataFrame([lst],columns=['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE'])
+            snow_df=session.create_dataframe(df)
+            snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_DEFAULTER_VALIDATION_DS")
+            if appln_type== 'None':
+                st.write("")
+            elif appln_type=='Retrieve Defaulted Applications ':
+                res=session.sql('CALL LENDINGAI_DB.BASE.SP_DEFAULTER_APPLICATIONS()').collect()
+                df=pd.DataFrame(res)
+                churned_df=df[df['LOAN_STATUS_BIN']==1]
+                final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
+                fig2 = go.Figure(data=[go.Table(
+                columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+                header=dict(
+                    values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
+                    fill_color='#CDCDD6',
+                    font_color="#4C4C54",
+                    align=['center'],
+                    line_color='#ffffff',
+                    font_size=14,
+                    height=40
+                ),
+                cells=dict(values=[final_churned_df.EMP_LENGTH,final_churned_df.INT_RATE,final_churned_df.LOAN_AMNT,final_churned_df.TERM,final_churned_df.HOME_OWNERSHIP,final_churned_df.ANNUAL_INC,final_churned_df.TITLE,final_churned_df.RISK_SCORE],fill_color = [['white','#f0f2f6']*3200], align=['center'], font_size = 12))])
+                # Update the layout of the Plotly table
+                fig2.update_layout(
+                    autosize=True,
+                    width=1400,
+                    height=400,
+                    margin=dict(l=0, r=0, b=0, t=0, pad=4),
+                    paper_bgcolor="#ffffff"
+                )
+                st.subheader("List of Defaulted Applications")
+                st.plotly_chart(fig2)
+            elif appln_type == 'Retrieve Successful Applications':
+                res=session.sql('CALL LENDINGAI_DB.BASE.SP_DEFAULTER_APPLICATIONS()').collect()
+                df=pd.DataFrame(res)
+                churned_df=df[df['LOAN_STATUS_BIN']==0]
+                final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
+                fig3 = go.Figure(data=[go.Table(
+                columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+                header=dict(
+                    values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
+                    fill_color='#CDCDD6',
+                    font_color="#4C4C54",
+                    align=['center'],
+                    line_color='#ffffff',
+                    font_size=14,
+                    height=40
+                ),
+                cells=dict(values=[final_churned_df.EMP_LENGTH,final_churned_df.INT_RATE,final_churned_df.LOAN_AMNT,final_churned_df.TERM,final_churned_df.HOME_OWNERSHIP,final_churned_df.ANNUAL_INC,final_churned_df.TITLE,final_churned_df.RISK_SCORE],fill_color = [['white','#f0f2f6']*3200], align=['center'], font_size = 12))])
+                # Update the layout of the Plotly table
+                fig3.update_layout(
+                    autosize=False,
+                    width=1400,
+                    height=400,
+                    margin=dict(l=0, r=0, b=0, t=0, pad=4),
+                    paper_bgcolor="#ffffff"
+                )
+                st.subheader("List of Successful Applications")
+                st.plotly_chart(fig3)
+            elif appln_type == 'Retrieve Both Applications':
+                res=session.sql('CALL LENDINGAI_DB.BASE.SP_DEFAULTER_APPLICATIONS()').collect()
+                churned_df=pd.DataFrame(res)
+                final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
+                fig4 = go.Figure(data=[go.Table(
+                columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+                header=dict(
+                    values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
+                    fill_color='#CDCDD6',
+                    font_color="#4C4C54",
+                    align=['center'],
+                    line_color='#ffffff',
+                    font_size=14,
+                    height=40
+                ),
+                cells=dict(values=[final_churned_df.EMP_LENGTH,final_churned_df.INT_RATE,final_churned_df.LOAN_AMNT,final_churned_df.TERM,final_churned_df.HOME_OWNERSHIP,final_churned_df.ANNUAL_INC,final_churned_df.TITLE,final_churned_df.RISK_SCORE],fill_color = [['white','#f0f2f6']*3200], align=['center'], font_size = 12))])
+                # Update the layout of the Plotly table
+                fig4.update_layout(
+                    autosize=False,
+                    width=1400,
+                    height=400,
+                    margin=dict(l=0, r=0, b=0, t=0, pad=4),
+                    paper_bgcolor="#ffffff"
+                )
+                st.subheader("List of Both Defaulted and Successful Applications")
+                st.plotly_chart(fig4)
