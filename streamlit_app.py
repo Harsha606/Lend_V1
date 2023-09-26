@@ -278,7 +278,7 @@ if selected_opt =='Churn Data':
             snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_CHURN_VALIDATION_DS")
             res=session.call('LENDINGAI_DB.MART.SP_CHURN_VALIDATION_PROC')
             churn_or_not=res[1]
-            with col13:
+            with col15:
                 st.write("")    
                 if churn_or_not=='0':
                     st.success("Churn likelihood: No")
