@@ -249,8 +249,8 @@ if selected_opt =='Churn Data':
       st.write("")
       appln_type = st.selectbox('Select preferred application data for retrievel:',
       ('None','Retrieve Churned Applications ','Retrieve Retained Applications','Retrieve Both Applications'))
-    col11,col12,col13,col14,col15,col16,col17=st.columns(7)
-    with col14:
+    col11,col12,col13,col14,col15,col16,col17,col18,col19=st.columns(9)
+    with col15:
         for _ in range(2):
             st.write("")
         btn1=st.button('Get Data',key='button_cntr6')
