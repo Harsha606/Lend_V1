@@ -143,8 +143,8 @@ if selected_opt =='Defaulter App':
             else:
                 st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt=='Segmentation':
-    table_name = 'LENDINGAI_DB.MART.TBL_KMEANS_SEGMENTATION'
-    df = session.table(table_name)
+    table_name = 'SELECT * FROM LENDINGAI_DB.MART.TBL_KMEANS_SEGMENTATION;'
+    df = session.createDataFrame(session.sql(table_name).collect())
     selected_term = 'Select Term'
     selected_purpose = 'Select Purpose'
     selected_home_ownership = 'Select Home Ownership'
