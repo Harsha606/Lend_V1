@@ -250,6 +250,7 @@ if selected_opt =='Churn Data':
       appln_type = st.selectbox('Select preferred application data for retrievel:',
       ('None','Retrieve Churned Applications ','Retrieve Retained Applications','Retrieve Both Applications'))
     col11,col12,col13,col14,col15,col16,col17,col18,col19=st.columns(9)
+    col20,col21,col22,col23,col24=st.columns(5)
     with col15:
         for _ in range(2):
             st.write("")
@@ -278,7 +279,7 @@ if selected_opt =='Churn Data':
             snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_CHURN_VALIDATION_DS")
             res=session.call('LENDINGAI_DB.MART.SP_CHURN_VALIDATION_PROC')
             churn_or_not=res[1]
-            with col15:
+            with col22:
                 st.write("")    
                 if churn_or_not=='0':
                     st.success("Churn likelihood: No")
