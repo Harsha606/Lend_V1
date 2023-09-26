@@ -253,7 +253,7 @@ if selected_opt =='Churn Data':
     with col13:
         for _ in range(2):
             st.write("")
-        btn1=st.button(':blue[Get Data]',key='button_cntr6',use_container_width=True)
+        btn1=st.button('Get Data',key='button_cntr6')
     def is_valid_data(credit_score,loan_amnt,annual_income,int_rate):
         if(0<=credit_score<=900  and loan_amnt>=0 and annual_income>=0 and int_rate>=0):
             return True
