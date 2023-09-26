@@ -15,7 +15,7 @@ session=Session.builder.configs(connection_parameters).create()
 col1,col2=st.columns(2)
 image = Image.open('LendingAI.png')
 st.image(image, width=250)
-selected_opt  = option_menu(None, ["Predictor App" ,"Defaulter App","Recommendation App","Segmentation",'Applications Data','Churn Data','Defaulter Data'],  
+selected_opt  = option_menu(None, ["Predictor App" ,"Defaulter App","Recommendation App","Segmentation",'Applications Data','Churn Data'],  
 default_index=0, orientation="horizontal",icons=None,
                 menu_icon=None,
                 styles={              
