@@ -185,7 +185,7 @@ if selected_opt == 'Applications Data':
     with col13:
         for _ in range(2):
             st.write("")
-        btn4=st.button(':blue[Retrieve Related Applications]',key='button_cntr2',use_container_width=True)
+        btn4=st.button(':blue[Retrieve Related Applications]',key='button_cntr2')
     if btn4:
         if is_valid_data(risk_score, amount_requested):
             lst = [risk_score, debt_to_income_ratio,emp_length,loan_title,amount_requested]
