@@ -50,7 +50,7 @@ if selected_opt == 'Predictor App':
             btn=st.button("Predict")
     with col2:
         if btn:
-            lst = [480, 50, employment_length,loan_title,amount_requested]
+            lst = [624, 61.62, employment_length,loan_title,amount_requested]
             df = pd.DataFrame([lst], columns=['RISK_SCORE','DEBT_TO_INCOME_RATIO','EMPLOYMENT_LENGTH', 'LOAN_TITLE','AMOUNT_REQUESTED'])
             snow_df = session.create_dataframe(df)
             snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_APPLICATIONSCORE_VALIDATION_DS_SNOWPARK")
@@ -564,4 +564,7 @@ if selected_opt=='Defaulter Data':
                 )
                 st.subheader("List of Both Defaulted and Successful Applications")
                 st.plotly_chart(fig4)
-st.markdown("<style="color:blue"><b>Copyright (c) Anblicks Inc.  </b><a href='https://www.anblicks.com'>https://www.anblicks.com</a></div>", unsafe_allow_html=True)
+      st.markdown("<b>Copyright (c) Anblicks Inc.  </b><a href='https://www.anblicks.com'>https://www.anblicks.com</a></div>", unsafe_allow_html=True)
+      else:
+        st.error("Invalid Data")
+  
