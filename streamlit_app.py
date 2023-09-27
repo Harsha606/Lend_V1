@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 import numpy as np
 from snowflake.snowpark.functions import avg, sum, col, lit
 from config import connection_parameters
-st.set_page_config(page_title="Lending AI",layout="wide",initial_sidebar_state="expanded")
+st.set_page_config(page_title="CustomerAI powered by Snowflake", page_icon="LendingAI.png",layout="wide")
 session=Session.builder.configs(connection_parameters).create()
 col1,col2=st.columns(2)
 image = Image.open('LendingAI.png')
