@@ -202,7 +202,7 @@ if selected_opt == 'Recommendation App':
         with col5:
             st.write("")
             st.write("Recommended Loan(s):")
-        col11,col12,col13col14.col15=st.columns(5)
+        col11,col12,col13,col14,col15=st.columns(5)
         with col13:
             st.markdown("<center><b>{}</b></center>".format(res[0]),unsafe_allow_html=True)
             st.image(imgs[res[0]])
