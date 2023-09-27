@@ -532,41 +532,27 @@ if selected_opt =='Churn Data':
         else:
             st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt=='Defaulter Data':
-    col1, col2 ,col3= st.columns(3)
+    col1, col2= st.columns([2.8,7.2])
     with col1:
       loan_amount = st.number_input('Loan Amount:',value=10000)
-      st.write("")
-      home_ownership = st.selectbox('Current Home Ownership Status:',
-    ('OWN', 'RENT', 'MORTGAGE','ANY'))
-      st.write("")
-      term = st.radio(
-    "Loan Repayment Tenure:",
-    ["36 months", "60 months"])
-    with col2:
+      home_ownership = st.selectbox('Current Home Ownership Status:',('OWN', 'RENT', 'MORTGAGE','ANY'))
+      term = st.radio("Loan Repayment Tenure:",["36 months", "60 months"])
       annual_income = st.number_input('Annual income:', value=120000)
-      st.write("")
       loan_type = st.selectbox('Type of loan:',
       ('Credit card refinancing','Debt consolidation','Home improvement','Major purchase','Business','Medical expenses','Moving and relocation','Vacation','Home buying','Green loan','Car financing','Other'))
-      st.write("")
       Employee_Exp = ["< 1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10+ years"]
       emp_length = st.select_slider("Experience:", options=Employee_Exp)
-    with col3:
       int_rate=st.number_input('Interest rate:',value=10)
-      st.write("")
       credit_score=st.number_input('Credit Score (Optional)',value=0)
-      st.write("")
       appln_type = st.selectbox('Choose desired data for application retrieval:',
       ('None','Retrieve Defaulted Applications ','Retrieve Successful Applications','Retrieve Both Applications'))
-    col11,col12,col13,col14,col15,col16,col17,col18,col19=st.columns(9)
-    with col15:
-        for _ in range(2):
-            st.write("")
-        btn1=st.button('Get Data',key='button_cntr7')
+      btn1=st.button('Get Data',key='button_cntr7')
     def is_valid_data(credit_score,loan_amount,annual_income,int_rate):
         if(0<=credit_score<=900  and loan_amount>=0 and annual_income>=0 and int_rate>=0):
             return True
         return False  
-    if btn1:
+    with col2:
+      if btn1:
         if is_valid_data(credit_score,loan_amount,annual_income,int_rate):
             if credit_score==0:
                 risk_score=602
@@ -592,7 +578,7 @@ if selected_opt=='Defaulter Data':
                 churned_df=df[df['LOAN_STATUS_BIN']==1]
                 final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
                 fig2 = go.Figure(data=[go.Table(
-                columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+                columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
                 header=dict(
                     values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
                     fill_color='#CDCDD6',
@@ -606,8 +592,8 @@ if selected_opt=='Defaulter Data':
                 # Update the layout of the Plotly table
                 fig2.update_layout(
                     autosize=True,
-                    width=1350,
-                    height=400,
+                    width=960,
+                    height=500,
                     margin=dict(l=0, r=0, b=0, t=0, pad=4),
                     paper_bgcolor="#ffffff"
                 )
@@ -619,7 +605,7 @@ if selected_opt=='Defaulter Data':
                 churned_df=df[df['LOAN_STATUS_BIN']==0]
                 final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
                 fig3 = go.Figure(data=[go.Table(
-                columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+                columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
                 header=dict(
                     values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
                     fill_color='#CDCDD6',
@@ -633,8 +619,8 @@ if selected_opt=='Defaulter Data':
                 # Update the layout of the Plotly table
                 fig3.update_layout(
                     autosize=False,
-                    width=1350,
-                    height=400,
+                    width=960,
+                    height=500,
                     margin=dict(l=0, r=0, b=0, t=0, pad=4),
                     paper_bgcolor="#ffffff"
                 )
@@ -645,7 +631,7 @@ if selected_opt=='Defaulter Data':
                 churned_df=pd.DataFrame(res)
                 final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
                 fig4 = go.Figure(data=[go.Table(
-                columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+                columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
                 header=dict(
                     values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
                     fill_color='#CDCDD6',
@@ -659,8 +645,8 @@ if selected_opt=='Defaulter Data':
                 # Update the layout of the Plotly table
                 fig4.update_layout(
                     autosize=False,
-                    width=1350,
-                    height=400,
+                    width=960,
+                    height=500,
                     margin=dict(l=0, r=0, b=0, t=0, pad=4),
                     paper_bgcolor="#ffffff"
                 )
