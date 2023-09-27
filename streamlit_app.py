@@ -127,9 +127,11 @@ if selected_opt =='Defaulter App':
                   st.markdown("<center><b>{}</b></center>".format("Probability of Customer Defaulter"),unsafe_allow_html=True)
                   st.plotly_chart(fig,use_container_width=True)
                 with col3:
-                  for _ in range(8):
+                  for _ in range(6):
                       st.write("")
                   st.markdown("<center><b>{}</b></center>".format("Top 5 Features Influencing Prediction"),unsafe_allow_html=True)
+                  for _ in range(3):
+                      st.write("")
                   st.image("defaulter_feat_imp.png",use_column_width="always")
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
