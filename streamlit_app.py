@@ -448,7 +448,7 @@ if selected_opt =='Churn Data':
       term = st.radio("Loan Repayment Term:",["36 months", "60 months"],horizontal=True)
       emp_length = st.select_slider("Experience:", options=Employee_Exp)
       credit_score=st.number_input('Credit Score (Optional)',value=0)
-      appln_type = st.selectbox('Select preferred application data for retrievel:',('None','Retrieve Churned Applications ','Retrieve Retained Applications','Retrieve Both Applications'))
+      appln_type = st.selectbox('Select preferred application data for retrievel:',('Retrieve Churned Applications ','Retrieve Retained Applications','Retrieve Both Applications'))
       btn1=st.button('Get Data',key='button_cntr6')
     def is_valid_data(credit_score,loan_amnt,annual_income,int_rate):
         if(0<=credit_score<=900  and loan_amnt>=0 and annual_income>=0 and int_rate>=0):
@@ -499,9 +499,7 @@ if selected_opt =='Churn Data':
             snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_CHURN_VALIDATION_DS")
             res=session.call('LENDINGAI_DB.MART.SP_CHURN_VALIDATION_PROC')
             churn_or_not=res[1]
-            if appln_type== 'None':
-                st.write("")
-            elif appln_type=='Retrieve Churned Applications ':
+            if appln_type=='Retrieve Churned Applications ':
                 res=session.sql('CALL LENDINGAI_DB.BASE.SP_CHURN_APPLICATIONS()').collect()
                 df=pd.DataFrame(res)
                 churned_df=df[df['LOAN_STATUS_BIN']==1]
@@ -597,7 +595,7 @@ if selected_opt=='Defaulter Data':
       emp_length = st.select_slider("Experience:", options=Employee_Exp)
       credit_score=st.number_input('Credit Score (Optional)',value=0)
       appln_type = st.selectbox('Choose desired data for application retrieval:',
-      ('None','Retrieve Defaulted Applications ','Retrieve Successful Applications','Retrieve Both Applications'))
+      ('Retrieve Defaulted Applications ','Retrieve Successful Applications','Retrieve Both Applications'))
       btn1=st.button('Get Data',key='button_cntr7')
     def is_valid_data(credit_score,loan_amount,annual_income,int_rate):
         if(0<=credit_score<=900  and loan_amount>=0 and annual_income>=0 and int_rate>=0):
@@ -646,9 +644,7 @@ if selected_opt=='Defaulter Data':
             df=pd.DataFrame([lst],columns=['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE'])
             snow_df=session.create_dataframe(df)
             snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_DEFAULTER_VALIDATION_DS")
-            if appln_type== 'None':
-                st.write("")
-            elif appln_type=='Retrieve Defaulted Applications ':
+            if appln_type=='Retrieve Defaulted Applications ':
                 res=session.sql('CALL LENDINGAI_DB.BASE.SP_DEFAULTER_APPLICATIONS()').collect()
                 df=pd.DataFrame(res)
                 churned_df=df[df['LOAN_STATUS_BIN']==1]
@@ -656,7 +652,7 @@ if selected_opt=='Defaulter Data':
                 fig2 = go.Figure(data=[go.Table(
                 columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
                 header=dict(
-                    values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
+                    values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUAL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
                     fill_color='#CDCDD6',
                     font_color="#4C4C54",
                     align=['center'],
@@ -683,7 +679,7 @@ if selected_opt=='Defaulter Data':
                 fig3 = go.Figure(data=[go.Table(
                 columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
                 header=dict(
-                    values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
+                    values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUAL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
                     fill_color='#CDCDD6',
                     font_color="#4C4C54",
                     align=['center'],
