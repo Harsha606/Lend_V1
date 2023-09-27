@@ -135,16 +135,7 @@ if selected_opt =='Defaulter App':
                   importances[0]=importances[0][1:]
                   importances[-1]=importances[-1][:-1]
                   feature_names, importances = features,importances
-                  # Create a vertical bar plot for feature importances
-                  plt.figure(figsize=(10, 6))
-                  plt.barh(range(len(feature_names)), importances, align='center')
-                  plt.yticks(range(len(feature_names)), feature_names)
-                  plt.xlabel('Feature Importance')
-                  plt.ylabel('Feature')
-                  plt.xlim(0, 1)
-                  plt.title('Variable Importance')
-                  #plt.gca().invert_yaxis()  # Invert the y-axis to show the most important features at the top
-                  st.pyplot(plt)
+                  st.dataframe([features,importances])
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
