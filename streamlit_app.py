@@ -336,20 +336,15 @@ if selected_opt=='Segmentation':
                     st.plotly_chart(fig, use_container_width=True)
 if selected_opt == 'Applications Data':
     res = session.call('LENDINGAI_DB.MART.SP_APPLICATIONSCORE_LR_VALIDATIONPROC_SNOWPARK')
-    col1, col2, col3 = st.columns(3)
+    col1, co12=st.columns([2.8,7.2])
     with col1:
         emp_length = st.selectbox("Experience:", ['< 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10+ years'], key="emp_length")
         debt_to_income_ratio = st.number_input('DTI Ratio:', min_value=0.0, key="debt_to_income_ratio")
-    with col2:
         amount_requested = st.number_input('Loan Amount:', min_value=0, key="amount_requested")
         loan_title = st.selectbox('Type of Loan:', ['Major purchase', 'Debt consolidation', 'Home improvement', 'Moving and relocation', 'Home buying', 'Business', 'Vacation', 'Car financing', 'Medical expenses', 'Credit card refinancing'], key="loan_title")
-    with col3:
         risk_score = st.number_input('Credit Score:', min_value=0, key="risk_score")
         application_status = st.selectbox("Select the application status", ['Approved', 'Rejected','Both'], key="application_status")
-    col4,col5=st.columns(2)
-    with col4:
         age = st.selectbox('Age:', ['0-18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
-    with col5:
         tenure = st.selectbox('Loan Repayment Tenure:', ['36 Months','60 Months'])
     # Predict
     if risk_score == 0:  # assuming default value of the input is 0 when nothing is entered
@@ -373,11 +368,9 @@ if selected_opt == 'Applications Data':
         if (0 <= risk_score <= 1000 and amount_requested >= 0):
             return True
         return False
-    col11,col12,col13,col14,col15=st.columns(5)
-    with col13:
-        for _ in range(2):
-            st.write("")
-        btn4=st.button('Retrieve Related Applications',key='button_cntr2')
+    col111,col112,col113,coll14=st.columns([1.2,0.8,1,7])
+    with col112:
+      btn4=st.button('Retrieve Related Applications',key='button_cntr2')
     if btn4:
         if is_valid_data(risk_score, amount_requested):
             lst = [risk_score, debt_to_income_ratio,emp_length,loan_title,amount_requested]
@@ -413,8 +406,9 @@ if selected_opt == 'Applications Data':
                     margin=dict(l=0, r=0, b=0, t=0, pad=4),
                     paper_bgcolor="#ffffff"
                 )
-        st.subheader("List of Applications")
-        st.plotly_chart(fig2)
+        with col2:
+          st.subheader("List of Applications")
+          st.plotly_chart(fig2)
 if selected_opt =='Churn Data':
     col1, col2 ,col3= st.columns(3)
     with col1:
