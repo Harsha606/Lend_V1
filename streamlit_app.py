@@ -455,7 +455,9 @@ if selected_opt =='Churn Data':
       emp_length = st.select_slider("Experience:", options=Employee_Exp)
       credit_score=st.number_input('Credit Score (Optional)',value=0)
       appln_type = st.selectbox('Select preferred application data for retrievel:',('Retrieve Churned Applications ','Retrieve Retained Applications','Retrieve Both Applications'))
-      btn1=st.button('Get Data',key='button_cntr6')
+    col11,col12,col13,col14=st.columns([0.8,1.2,0.8,7.2])
+    with col12:
+        btn1=st.button('Get Data',key='button_cntr6')
     def is_valid_data(credit_score,loan_amnt,annual_income,int_rate):
         if(0<=credit_score<=900  and loan_amnt>=0 and annual_income>=0 and int_rate>=0):
             return True
