@@ -281,10 +281,9 @@ if selected_opt=='Segmentation':
                 with col8:
                     if not df3.empty:
                         # Create a bar chart using Plotly
+                        st.write("Approved Applications by Loan Status")
                         fig = px.bar(df3, x="LOAN_STATUS", y="Approved Applications", labels={"LOAN_STATUS": "Loan Status", "Approved Applications": "Approved Applications"})
                         fig.update_layout(
-                            title_text="Approved Applications by Loan Status",
-                            title_font=dict(size=20),  # Set title font size and family
                             xaxis_tickangle=-45  # Rotate x-axis labels for better readability
                         )
                         fig.update_traces(texttemplate='%{y}', textposition='outside')  # Add value annotations on top of each bar
@@ -314,11 +313,10 @@ if selected_opt=='Segmentation':
                 # Create a bar graph with values displayed on top of bars
                 with col8:
                     if not df3.empty:
+                        st.write("Approved Applications by Loan Status")
                         # Create a bar chart using Plotly
                         fig = px.bar(df3, x="LOAN_STATUS", y="Approved Applications", labels={"LOAN_STATUS": "Loan Status", "Approved Applications": "Approved Applications"})
                         fig.update_layout(
-                            title_text="Approved Applications by Loan Status",
-                            title_font=dict(size=20),  # Set title font size and family
                             xaxis_tickangle=-45  # Rotate x-axis labels for better readability
                         )
                         fig.update_traces(texttemplate='%{y}', textposition='outside')  # Add value annotations on top of each bar
