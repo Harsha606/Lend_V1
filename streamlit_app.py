@@ -340,10 +340,10 @@ if selected_opt == 'Applications Data':
         debt_to_income_ratio = st.number_input('DTI Ratio:', min_value=0.0, key="debt_to_income_ratio")
         amount_requested = st.number_input('Loan Amount:', min_value=0, key="amount_requested")
         loan_title = st.selectbox('Type of Loan:', ['Major purchase', 'Debt consolidation', 'Home improvement', 'Moving and relocation', 'Home buying', 'Business', 'Vacation', 'Car financing', 'Medical expenses', 'Credit card refinancing'], key="loan_title")
-        risk_score = st.number_input('Credit Score:', min_value=0, key="risk_score")
         application_status = st.selectbox("Select the application status", ['Approved', 'Rejected','Both'], key="application_status")
         age = st.selectbox('Age:', ['0-18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
         tenure = st.selectbox('Loan Repayment Tenure:', ['36 Months','60 Months'])
+        risk_score = st.number_input('Credit Score (Optional):', min_value=0, key="risk_score")
     col11,col12,col13,col14=st.columns([0.4,2.0,0.4,7.2])
     with col12:
       btn4=st.button('Retrieve Related Applications',key='button_cntr2')
