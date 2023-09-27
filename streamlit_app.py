@@ -346,6 +346,7 @@ if selected_opt == 'Applications Data':
         application_status = st.selectbox("Select the application status", ['Approved', 'Rejected','Both'], key="application_status")
         age = st.selectbox('Age:', ['0-18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
         tenure = st.selectbox('Loan Repayment Tenure:', ['36 Months','60 Months'])
+        btn4=st.button('Retrieve Related Applications',key='button_cntr2')
     # Predict
     if risk_score == 0:  # assuming default value of the input is 0 when nothing is entered
         risk_score = 624
@@ -368,9 +369,6 @@ if selected_opt == 'Applications Data':
         if (0 <= risk_score <= 1000 and amount_requested >= 0):
             return True
         return False
-    col111,col112,col113,coll14=st.columns([1.2,0.8,1,7])
-    with col112:
-      btn4=st.button('Retrieve Related Applications',key='button_cntr2')
     with col2:
         if btn4:
           if is_valid_data(risk_score, amount_requested):
@@ -396,14 +394,14 @@ if selected_opt == 'Applications Data':
                         align=['center'],
                         line_color='#ffffff',
                         font_size=14,
-                        height=40
+                        height=20
                     ),
                     cells=dict(values=[final_appscore_df.EMPLOYMENT_LENGTH,final_appscore_df.DEBT_TO_INCOME_RATIO,final_appscore_df.AMOUNT_REQUESTED,final_appscore_df.LOAN_TITLE,final_appscore_df.RISK_SCORE],fill_color = [['white','#f0f2f6']*3200], align=['center'], font_size = 12))])
                     # Update the layout of the Plotly table
           fig2.update_layout(
                         autosize=False,
-                        width=1000,
-                        height=400,
+                        width=300,
+                        height=200,
                         margin=dict(l=0, r=0, b=0, t=0, pad=4),
                         paper_bgcolor="#ffffff"
                     )
