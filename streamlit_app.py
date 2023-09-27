@@ -142,7 +142,7 @@ if selected_opt =='Defaulter App':
                   plt.xlabel('Feature Importance')
                   plt.ylabel('Feature')
                   plt.title('Variable Importance')
-                  plt.gca().invert_yaxis()  # Invert the y-axis to show the most important features at the top
+                  #plt.gca().invert_yaxis()  # Invert the y-axis to show the most important features at the top
                   st.pyplot(plt)
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
