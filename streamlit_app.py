@@ -403,6 +403,7 @@ if selected_opt == 'Applications Data':
                         margin=dict(l=0, r=0, b=0, t=0, pad=4),
                         paper_bgcolor="#ffffff"
                     )
+          st.write("")
           st.plotly_chart(fig2)
 if selected_opt =='Churn Data':
     col1, col2 ,col3= st.columns(3)
