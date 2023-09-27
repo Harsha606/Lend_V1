@@ -249,8 +249,11 @@ if selected_opt=='Segmentation':
     else:
         min_income = 400001  # Default to more than 4L
         max_income = 600000  # Set a very large value for the upper limit
+    col11,col12,col13,col14,col15,col16,col17,col18,col19=st.columns(9)
+    with col15:
+      btnn=st.button("Submit")
     # Create a button to apply the filter
-    if st.button("Submit"):
+    if btnn:
         table_name = session.sql('SELECT * FROM LENDINGAI_DB.MART.TBL_KMEANS_SEGMENTATION2').collect()
         df = pd.DataFrame(table_name)
         df['ANNUAL_INC']=pd.to_numeric(df['ANNUAL_INC'], errors='coerce')
