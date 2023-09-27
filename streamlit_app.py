@@ -293,7 +293,7 @@ if selected_opt=='Segmentation':
                 if table_data.count() > 0:
                     st.write("Data Based on Filters:")
                     selected_columns = [
-                        "TITLE", "INSTALLMENT","LOAN_STATUS", "EMP_LENGTH","INT_RATE",
+                        "TITLE","LOAN_STATUS", "EMP_LENGTH","INT_RATE",
                         "TERM", "ACC_NOW_DELINQ","HOME_OWNERSHIP" ,"ANNUAL_INC", "AVG_CUR_BAL", "DELINQ_2YRS",
                         "DTI", "LOAN_AMNT", "OPEN_ACC_6M", "TOTAL_BAL_EX_MORT", "TOTAL_BAL_IL",
                         "TOTAL_PYMNT", "DEBT_SETTLEMENT_FLAG", "VERIFICATION_STATUS", "CLUSTERS"
@@ -354,7 +354,7 @@ if selected_opt=='Segmentation':
                 if table_data.count() > 0:
                     st.write("Table Data Based on Filters:")
                     selected_columns = [
-                        "TITLE", "INSTALLMENT","LOAN_STATUS", "EMP_LENGTH","INT_RATE",
+                        "TITLE","LOAN_STATUS", "EMP_LENGTH","INT_RATE",
                         "TERM", "ACC_NOW_DELINQ","HOME_OWNERSHIP" ,"ANNUAL_INC", "AVG_CUR_BAL", "DELINQ_2YRS",
                         "DTI", "LOAN_AMNT", "OPEN_ACC_6M", "TOTAL_BAL_EX_MORT", "TOTAL_BAL_IL",
                         "TOTAL_PYMNT", "DEBT_SETTLEMENT_FLAG", "VERIFICATION_STATUS", 'CLUSTERS'
