@@ -398,7 +398,7 @@ if selected_opt == 'Applications Data':
                     # Update the layout of the Plotly table
           fig2.update_layout(
                         autosize=False,
-                        width=960,
+                        width=970,
                         height=500,
                         margin=dict(l=0, r=0, b=0, t=0, pad=4),
                         paper_bgcolor="#ffffff"
