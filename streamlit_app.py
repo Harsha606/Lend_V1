@@ -408,42 +408,26 @@ if selected_opt == 'Applications Data':
           st.subheader("List of Applications")
           st.plotly_chart(fig2)
 if selected_opt =='Churn Data':
-    col1, col2 ,col3= st.columns(3)
+    col1, col2 =st.colums([2.8,7.2])
     with col1:
       loan_amnt = st.number_input('Loan Amount:',value=10000)
-      st.write("")
-      home_ownership = st.selectbox('Type of Home Ownership:',
-    ('OWN', 'RENT', 'MORTGAGE','ANY'))
-      st.write("")
-      term = st.radio(
-    "Loan Repayment Term:",
-    ["36 months", "60 months"])
-    with col2:
+      home_ownership = st.selectbox('Type of Home Ownership:',('OWN', 'RENT', 'MORTGAGE','ANY'))
+      term = st.radio("Loan Repayment Term:",["36 months", "60 months"])
       annual_income = st.number_input('Annual Income:', value=120000)
-      st.write("")
       loan_type = st.selectbox('Type of Loan:',
       ('Credit card refinancing','Debt consolidation','Home improvement','Major purchase','Business','Medical expenses','Moving and relocation','Vacation','Home buying','Green loan','Car financing','Other'))
-      st.write("")
       Employee_Exp = ["< 1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10+ years"]
       emp_length = st.select_slider("Experience:", options=Employee_Exp)
-    with col3:
       int_rate=st.number_input('Interest Rate:',value=10)
-      st.write("")
       credit_score=st.number_input('Credit Score (Optional)',value=0)
-      st.write("")
-      appln_type = st.selectbox('Select preferred application data for retrievel:',
-      ('None','Retrieve Churned Applications ','Retrieve Retained Applications','Retrieve Both Applications'))
-    col11,col12,col13,col14,col15,col16,col17,col18,col19=st.columns(9)
-    col20,col21,col22,col23,col24=st.columns(5)
-    with col15:
-        for _ in range(2):
-            st.write("")
-        btn1=st.button('Get Data',key='button_cntr6')
+      appln_type = st.selectbox('Select preferred application data for retrievel:',('None','Retrieve Churned Applications ','Retrieve Retained Applications','Retrieve Both Applications'))
+      btn1=st.button('Get Data',key='button_cntr6')
     def is_valid_data(credit_score,loan_amnt,annual_income,int_rate):
         if(0<=credit_score<=900  and loan_amnt>=0 and annual_income>=0 and int_rate>=0):
             return True
         return False  
-    if btn1:
+    with col2:
+      if btn1:
         if is_valid_data(credit_score,loan_amnt,annual_income,int_rate):
             if credit_score==0:
                 risk_score=602
@@ -463,12 +447,6 @@ if selected_opt =='Churn Data':
             snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_CHURN_VALIDATION_DS")
             res=session.call('LENDINGAI_DB.MART.SP_CHURN_VALIDATION_PROC')
             churn_or_not=res[1]
-            with col22:
-                st.write("")    
-                if churn_or_not=='0':
-                    st.success("Churn likelihood: No")
-                else:
-                    st.warning("Churn likelihood: Yes")
             if appln_type== 'None':
                 st.write("")
             elif appln_type=='Retrieve Churned Applications ':
@@ -491,8 +469,8 @@ if selected_opt =='Churn Data':
                 # Update the layout of the Plotly table
                 fig2.update_layout(
                     autosize=False,
-                    width=1350,
-                    height=400,
+                    width=960,
+                    height=500,
                     margin=dict(l=0, r=0, b=0, t=0, pad=4),
                     paper_bgcolor="#ffffff"
                 )
@@ -518,8 +496,8 @@ if selected_opt =='Churn Data':
                 # Update the layout of the Plotly table
                 fig3.update_layout(
                     autosize=False,
-                    width=1350,
-                    height=400,
+                    width=960,
+                    height=500,
                     margin=dict(l=0, r=0, b=0, t=0, pad=4),
                     paper_bgcolor="#ffffff"
                 )
@@ -544,8 +522,8 @@ if selected_opt =='Churn Data':
                 # Update the layout of the Plotly table
                 fig4.update_layout(
                     autosize=False,
-                    width=1350,
-                    height=400,
+                    width=960,
+                    height=500,
                     margin=dict(l=0, r=0, b=0, t=0, pad=4),
                     paper_bgcolor="#ffffff"
                 )
