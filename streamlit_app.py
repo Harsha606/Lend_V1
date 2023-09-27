@@ -148,8 +148,7 @@ if selected_opt == 'Recommendation App':
     col1,col2,col3=st.columns(3)
     with col2:
             # Create the dropdown
-            st.write("Select Application ID:")
-            selected_id = st.selectbox("", data)
+            selected_id = st.selectbox("Select Application ID:", data)
             # Define a CSS style for the dropdown
         # Filter the DataFrame based on the selected "ID"
             filtered_df = trans_id_data[trans_id_data['id'] == selected_id]
@@ -565,7 +564,4 @@ if selected_opt=='Defaulter Data':
                 )
                 st.subheader("List of Both Defaulted and Successful Applications")
                 st.plotly_chart(fig4)
-
-for _ in range(8):
-  st.write("")
-st.markdown("<div class='custom_footer'><b>Copyright (c) Anblicks Inc.  </b><a href='https://www.anblicks.com'>https://www.anblicks.com</a></div>", True)
+st.markdown("<div class='custom_footer'><b>Copyright (c) Anblicks Inc.  </b><a href='https://www.anblicks.com'>https://www.anblicks.com</a></div>", unsafe_allow_html=True)
