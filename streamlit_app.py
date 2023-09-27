@@ -552,25 +552,7 @@ if selected_opt=='Defaulter Data':
             return True
         return False  
     with col2:
-      if btn1:
-        if is_valid_data(credit_score,loan_amount,annual_income,int_rate):
-            if credit_score==0:
-                risk_score=602
-                if int_rate>20:
-                    risk_score+=80
-                elif 15<=int_rate<20:
-                    risk_score+=60
-                elif 10<=int_rate<15:
-                    risk_score+=30
-                elif 5<=int_rate<10:
-                    risk_score+=10
-            else:
-                risk_score=credit_score
-            lst=[emp_length,int_rate,float(loan_amount),term,home_ownership,float(annual_income),loan_type,risk_score]
-            df=pd.DataFrame([lst],columns=['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE'])
-            snow_df=session.create_dataframe(df)
-            snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_DEFAULTER_VALIDATION_DS")
-            res=session.sql('CALL LENDINGAI_DB.BASE.SP_DEFAULTER_APPLICATIONS()').collect()
+      res=session.sql('CALL LENDINGAI_DB.BASE.SP_DEFAULTER_APPLICATIONS()').collect()
             churned_df=pd.DataFrame(res).iloc[:20]
             final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
             fig44 = go.Figure(data=[go.Table(
@@ -595,6 +577,24 @@ if selected_opt=='Defaulter Data':
                 )
             st.subheader("List of Both Defaulted and Successful Applications")
             st.plotly_chart(fig44)
+      if btn1:
+        if is_valid_data(credit_score,loan_amount,annual_income,int_rate):
+            if credit_score==0:
+                risk_score=602
+                if int_rate>20:
+                    risk_score+=80
+                elif 15<=int_rate<20:
+                    risk_score+=60
+                elif 10<=int_rate<15:
+                    risk_score+=30
+                elif 5<=int_rate<10:
+                    risk_score+=10
+            else:
+                risk_score=credit_score
+            lst=[emp_length,int_rate,float(loan_amount),term,home_ownership,float(annual_income),loan_type,risk_score]
+            df=pd.DataFrame([lst],columns=['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE'])
+            snow_df=session.create_dataframe(df)
+            snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_DEFAULTER_VALIDATION_DS")
             if appln_type== 'None':
                 st.write("")
             elif appln_type=='Retrieve Defaulted Applications ':
