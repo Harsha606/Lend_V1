@@ -141,7 +141,7 @@ if selected_opt =='Defaulter App':
                   for _ in range(6):
                       st.write("")
                   st.plotly_chart(fig,use_container_width=True)
-        else:
+          else:
             st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
     # Get data from Snowflake for the tables
