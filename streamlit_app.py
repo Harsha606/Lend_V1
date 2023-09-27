@@ -204,12 +204,12 @@ if selected_opt=='Segmentation':
     selected_home_ownership = 'Select Home Ownership'
     #selected_debt_settlement_flag = 'Select Debt Settlement Flag'
     selected_cluster = 'Select cluster'
-    distinct_clusters_df = df.select("CLUSTERS").distinct()
+    distinct_clusters_df = df.select("CLUSTERS").distinct().to_pandas()
     distinct_cluster = [row["CLUSTERS"] for row in distinct_clusters_df.collect()]
     distinct_cluster.insert(0, "All Clusters")
-    distinct_term = df.select("TERM").distinct().collect()
-    distinct_purpose = df.select("PURPOSE").distinct().collect()
-    distinct_home_ownership = df.select("HOME_OWNERSHIP").distinct().collect()
+    distinct_term = df.select("TERM").distinct().collect().to_pandas()
+    distinct_purpose = df.select("PURPOSE").distinct().collect().to_pandas()
+    distinct_home_ownership = df.select("HOME_OWNERSHIP").distinct().collect().to_pandas()
     # Create a row with three columns
     col1, col2, col3 = st.columns(3)
     # Column 1: Filters
@@ -258,7 +258,7 @@ if selected_opt=='Segmentation':
     with col13:
         for _ in range(2):
             st.write("")
-        btn1=st.button(':blue[Submit]',key='button_cntr8',use_container_width=True)
+        btn1=st.button('Submit',key='button_cntr8')
     if btn1:
         # Check if the selected filter values are not the default values before creating the query
         if selected_term != 'Select Term' and selected_home_ownership != 'Select Home Ownership':
