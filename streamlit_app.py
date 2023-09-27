@@ -536,13 +536,13 @@ if selected_opt=='Defaulter Data':
     with col1:
       loan_amount = st.number_input('Loan Amount:',value=10000)
       home_ownership = st.selectbox('Current Home Ownership Status:',('OWN', 'RENT', 'MORTGAGE','ANY'))
-      term = st.radio("Loan Repayment Tenure:",["36 months", "60 months"])
       annual_income = st.number_input('Annual income:', value=120000)
       loan_type = st.selectbox('Type of loan:',
       ('Credit card refinancing','Debt consolidation','Home improvement','Major purchase','Business','Medical expenses','Moving and relocation','Vacation','Home buying','Green loan','Car financing','Other'))
+      int_rate=st.number_input('Interest rate:',value=10)
+      term = st.radio("Loan Repayment Tenure:",["36 months", "60 months"])
       Employee_Exp = ["< 1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10+ years"]
       emp_length = st.select_slider("Experience:", options=Employee_Exp)
-      int_rate=st.number_input('Interest rate:',value=10)
       credit_score=st.number_input('Credit Score (Optional)',value=0)
       appln_type = st.selectbox('Choose desired data for application retrieval:',
       ('None','Retrieve Defaulted Applications ','Retrieve Successful Applications','Retrieve Both Applications'))
