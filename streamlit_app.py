@@ -392,7 +392,7 @@ if selected_opt=='Segmentation':
         # Create a pie chart with values displayed on hover
         with col9:
             # Corrected SQL query with a space before GROUP BY
-            query = f'SELECT "Clusters", COUNT(*) as "Approved Applications" FROM {table_name} WHERE ' \
+            query = f'SELECT "CLUSTERS", COUNT(*) as "Approved Applications" FROM {table_name} WHERE ' \
                     f'"LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value} ' \
                     f'AND "TERM" = \'{selected_term}\' AND "HOME_OWNERSHIP" = \'{selected_home_ownership}\' ' \
                     f'AND "ANNUAL_INC" >= {min_income} AND "ANNUAL_INC" <= {max_income} '\
