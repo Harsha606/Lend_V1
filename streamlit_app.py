@@ -77,7 +77,7 @@ if selected_opt == 'Predictor App':
             st.markdown("<center><b>Probability of Loan Approval</b></center>",unsafe_allow_html=True)
             st.plotly_chart(fig,use_container_width=True)
 if selected_opt =='Defaulter App':
-    col1, col2=st.columns([2.8,7.2])
+    col1, col2 col3=st.columns([2.8,3.6,3.6])
     with col1:
             loan_amnt = st.number_input('Loan Amount:',value=10000)
             home_ownership = st.selectbox('Home Ownership:',('OWN', 'RENT', 'MORTGAGE','ANY'))
@@ -94,9 +94,8 @@ if selected_opt =='Defaulter App':
         if(0<=credit_score<=900  and loan_amnt>=0 and annual_income>=0 and int_rate>=0):
             return True
         return False  
-    with col2:
-        if btn:
-            if is_valid_data2(credit_score,loan_amnt,annual_income,int_rate):
+    if btn:
+          if is_valid_data2(credit_score,loan_amnt,annual_income,int_rate):
                 if credit_score==0:
                     risk_score=596
                     if int_rate>20:
@@ -115,33 +114,35 @@ if selected_opt =='Defaulter App':
                 snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_DEFAULTER_VALIDATION_DS")
                 res=session.call('LENDINGAI_DB.MART.SP_DEFAULTER_VALIDATION_PROC')
                 probability_of_nondefaulter,probability_of_defaulter=math.floor(float(res[7:9]+'.'+res[11])), math.ceil(float(res[18:20]+'.'+res[21]))
-                fig = px.bar(                                     
+                with col2:
+                  fig = px.bar(                                     
                     x=['No', 'Yes'],
                     y=[probability_of_nondefaulter, probability_of_defaulter],
                     color=['No','Yes'],
                     color_discrete_map = {'Yes': '#00A300', 'No': '#FF4500'},
                     labels={'x': 'Defaulter', 'y': 'Probability'})
-                fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
-                fig.update_layout(title_text='Probability of Customer Defaulter',width=500)
-                for _ in range(6):
-                    st.write("")
-                st.plotly_chart(fig,use_container_width=True)
-                features=res[28:93].split(',')
-                features[0]=features[0][1:]
-                features[-1]=features[-1][:-1]
-                importances=res[93:].split(',')
-                importances[0]=importances[0][1:]
-                importances[-1]=importances[-1][:-1]
-                df=pd.DataFrame(list(zip(features,importances)),columns=['Features','Importance'])
-                fig = px.bar(df, x="Importance", y="Features", orientation='h')
-                fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
-                fig.update_layout(title_text='Top 5 Features Influencing Prediction',width=500)
-                fig.update_layout(yaxis=dict(autorange="reversed"))
-                for _ in range(6):
-                    st.write("")
-                st.plotly_chart(fig,use_container_width=True)
-            else:
-                st.error("Entered Invalid data, Please check your Inputs...")
+                  fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
+                  fig.update_layout(title_text='Probability of Customer Defaulter',width=500)
+                  for _ in range(6):
+                      st.write("")
+                  st.plotly_chart(fig,use_container_width=True)
+                with col3:
+                  features=res[28:93].split(',')
+                  features[0]=features[0][1:]
+                  features[-1]=features[-1][:-1]
+                  importances=res[93:].split(',')
+                  importances[0]=importances[0][1:]
+                  importances[-1]=importances[-1][:-1]
+                  df=pd.DataFrame(list(zip(features,importances)),columns=['Features','Importance'])
+                  fig = px.bar(df, x="Importance", y="Features", orientation='h')
+                  fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
+                  fig.update_layout(title_text='Top 5 Features Influencing Prediction',width=500)
+                  fig.update_layout(yaxis=dict(autorange="reversed"))
+                  for _ in range(6):
+                      st.write("")
+                  st.plotly_chart(fig,use_container_width=True)
+        else:
+            st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
     # Get data from Snowflake for the tables
     transform_df = session.sql('SELECT * FROM LENDINGAI_DB.BASE.TBL_ID_TABLE;').collect()
