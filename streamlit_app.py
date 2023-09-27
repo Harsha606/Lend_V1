@@ -123,6 +123,7 @@ if selected_opt =='Defaulter App':
                     labels={'x': 'Defaulter', 'y': 'Probability'})
                   fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
                   fig.update_layout(title_text='Probability of Customer Defaulter',width=500)
+                  fig.update_layout(barmode='overlay')
                   for _ in range(6):
                       st.write("")
                   st.plotly_chart(fig,use_container_width=True)
