@@ -11,10 +11,10 @@ import numpy as np
 from snowflake.snowpark.functions import avg, sum, col, lit
 from config import connection_parameters
 st.set_page_config(page_title="LendingAI powered by Snowflake", page_icon="lendingai_logo.png",layout="wide")
-st.image(image, width=250)
+st.image('LendingAI.png', width=250)
 session=Session.builder.configs(connection_parameters).create()
 col1,col2=st.columns(2)
-image = Image.open('LendingAI.png')
+
 selected_opt  = option_menu(None, ["Predictor App" ,"Defaulter App","Recommendation App","Segmentation",'Applications Data','Churn Data','Defaulter Data'],  
 default_index=0, orientation="horizontal",icons=None,
                 menu_icon=None,
