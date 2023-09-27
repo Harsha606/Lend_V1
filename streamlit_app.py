@@ -371,7 +371,8 @@ if selected_opt == 'Applications Data':
     col111,col112,col113,coll14=st.columns([1.2,0.8,1,7])
     with col112:
       btn4=st.button('Retrieve Related Applications',key='button_cntr2')
-    if btn4:
+    with col2:
+      if btn4:
         if is_valid_data(risk_score, amount_requested):
             lst = [risk_score, debt_to_income_ratio,emp_length,loan_title,amount_requested]
             df = pd.DataFrame([lst], columns=['RISK_SCORE','DEBT_TO_INCOME_RATIO','EMPLOYMENT_LENGTH','LOAN_TITLE','AMOUNT_REQUESTED'])
@@ -401,7 +402,7 @@ if selected_opt == 'Applications Data':
                 # Update the layout of the Plotly table
         fig2.update_layout(
                     autosize=False,
-                    width=1350,
+                    width=1000,
                     height=400,
                     margin=dict(l=0, r=0, b=0, t=0, pad=4),
                     paper_bgcolor="#ffffff"
