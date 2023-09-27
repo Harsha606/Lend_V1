@@ -127,7 +127,7 @@ if selected_opt =='Defaulter App':
                       st.write("")
                   st.plotly_chart(fig,use_container_width=True)
                 with col3:
-                  st.image("defauter_feat_imp.png",use_container_width=True)
+                  st.image("defaulter_feat_imp.png",use_container_width=True)
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
