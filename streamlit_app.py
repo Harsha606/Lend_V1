@@ -213,8 +213,8 @@ if selected_opt=='Segmentation':
         selected_term = st.selectbox('Term:',["60 months","36 months"] )
         selected_home_ownership = st.selectbox('Home Ownership:', ["RENT","MORTGAGE","ANY","OWN","NONE"])
     with col2:
-        annual_income_input = st.number_input('Annual Income:', min_value=0)
-        loan_amount_input = st.number_input('Loan Amount:', min_value=0)
+        annual_income_input = st.number_input('Annual Income:', min_value=0,value=100000)
+        loan_amount_input = st.number_input('Loan Amount:', min_value=0,value=10000)
     with col3:
         selected_purpose = st.selectbox('Purpose:', ["house","medical","vacation","moving","credit_card","home_improvement","small_business","major_purchase","car","renewable_energy","wedding","debt_consolidation","educational","other"])
         selected_cluster = st.selectbox('Clusters:', ["All Clusters",0,1,2,3,4])
