@@ -412,13 +412,13 @@ if selected_opt =='Churn Data':
     with col1:
       loan_amnt = st.number_input('Loan Amount:',value=10000)
       home_ownership = st.selectbox('Type of Home Ownership:',('OWN', 'RENT', 'MORTGAGE','ANY'))
-      term = st.radio("Loan Repayment Term:",["36 months", "60 months"])
       annual_income = st.number_input('Annual Income:', value=120000)
       loan_type = st.selectbox('Type of Loan:',
       ('Credit card refinancing','Debt consolidation','Home improvement','Major purchase','Business','Medical expenses','Moving and relocation','Vacation','Home buying','Green loan','Car financing','Other'))
       Employee_Exp = ["< 1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10+ years"]
-      emp_length = st.select_slider("Experience:", options=Employee_Exp)
       int_rate=st.number_input('Interest Rate:',value=10)
+      term = st.radio("Loan Repayment Term:",["36 months", "60 months"])
+      emp_length = st.select_slider("Experience:", options=Employee_Exp)
       credit_score=st.number_input('Credit Score (Optional)',value=0)
       appln_type = st.selectbox('Select preferred application data for retrievel:',('None','Retrieve Churned Applications ','Retrieve Retained Applications','Retrieve Both Applications'))
       btn1=st.button('Get Data',key='button_cntr6')
