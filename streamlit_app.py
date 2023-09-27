@@ -270,7 +270,7 @@ if selected_opt=='Segmentation':
         if selected_term != 'Select Term' and selected_home_ownership != 'Select Home Ownership':
             # Create a query based on all selected filters and the loan amount and annual income inputs
             if selected_cluster == "All Clusters":
-                dff=df[df[CLUSTERS]==='All Cluters']
+                dff=df[df[CLUSTERS]=='All Cluters']
                 query = f'SELECT  count(*) as "Approved Applications" FROM {table_name} WHERE ' \
                         f'"LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value} ' \
                         f'AND "TERM" = \'{selected_term}\' AND "HOME_OWNERSHIP" = \'{selected_home_ownership}\' ' \
