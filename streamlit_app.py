@@ -417,7 +417,7 @@ if selected_opt =='Churn Data':
       ('Credit card refinancing','Debt consolidation','Home improvement','Major purchase','Business','Medical expenses','Moving and relocation','Vacation','Home buying','Green loan','Car financing','Other'))
       Employee_Exp = ["< 1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10+ years"]
       int_rate=st.number_input('Interest Rate:',value=10)
-      term = st.radio("Loan Repayment Term:",["36 months", "60 months"])
+      term = st.radio("Loan Repayment Term:",["36 months", "60 months"],horizontal=True)
       emp_length = st.select_slider("Experience:", options=Employee_Exp)
       credit_score=st.number_input('Credit Score (Optional)',value=0)
       appln_type = st.selectbox('Select preferred application data for retrievel:',('None','Retrieve Churned Applications ','Retrieve Retained Applications','Retrieve Both Applications'))
@@ -540,7 +540,7 @@ if selected_opt=='Defaulter Data':
       loan_type = st.selectbox('Type of loan:',
       ('Credit card refinancing','Debt consolidation','Home improvement','Major purchase','Business','Medical expenses','Moving and relocation','Vacation','Home buying','Green loan','Car financing','Other'))
       int_rate=st.number_input('Interest rate:',value=10)
-      term = st.radio("Loan Repayment Tenure:",["36 months", "60 months"])
+      term = st.radio("Loan Repayment Tenure:",["36 months", "60 months"],horizontal=True)
       Employee_Exp = ["< 1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10+ years"]
       emp_length = st.select_slider("Experience:", options=Employee_Exp)
       credit_score=st.number_input('Credit Score (Optional)',value=0)
