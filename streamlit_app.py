@@ -190,13 +190,13 @@ if selected_opt == 'Recommendation App':
         with col5:
             st.write("")
             st.write("Recommended Loan(s):")
-            colr1,colr2=st.columns(2)
-            with colr1:
-                st.markdown("<center><b>{}</b></center>".format(res[0]),unsafe_allow_html=True)
-                st.image(imgs[res[0]])
-            with colr2:
-                st.markdown("<center><b>{}</b></center>".format(res[1]),unsafe_allow_html=True)
-                st.image(imgs[res[1]])
+        colr1,colr2=st.columns(2)
+        with colr1:
+            st.markdown("<center><b>{}</b></center>".format(res[0]),unsafe_allow_html=True)
+            st.image(imgs[res[0]])
+        with colr2:
+            st.markdown("<center><b>{}</b></center>".format(res[1]),unsafe_allow_html=True)
+            st.image(imgs[res[1]])
     elif len(arr)==1:
         res=arr
         with col5:
