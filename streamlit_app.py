@@ -334,7 +334,7 @@ if selected_opt=='Segmentation':
                     st.plotly_chart(fig, use_container_width=True)
 if selected_opt == 'Applications Data':
     res = session.call('LENDINGAI_DB.MART.SP_APPLICATIONSCORE_LR_VALIDATIONPROC_SNOWPARK')
-    col1, co12=st.columns([2.8,7.2])
+    col1, col2 =st.columns([2.8,7.2])
     with col1:
         emp_length = st.selectbox("Experience:", ['< 1 year', '1 year', '2 years', '3 years', '4 years', '5 years', '6 years', '7 years', '8 years', '9 years', '10+ years'], key="emp_length")
         debt_to_income_ratio = st.number_input('DTI Ratio:', min_value=0.0, key="debt_to_income_ratio")
