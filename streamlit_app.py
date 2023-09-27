@@ -604,6 +604,8 @@ if selected_opt=='Defaulter Data':
       credit_score=st.number_input('Credit Score (Optional)',value=0)
       appln_type = st.selectbox('Choose desired data for application retrieval:',
       ('Retrieve Defaulted Applications ','Retrieve Successful Applications','Retrieve Both Applications'))
+    col11,col12,col13,col14=st.columns([1.0,1.2,0.8,7.0])
+    with col12:
       btn1=st.button('Get Data',key='button_cntr7')
     def is_valid_data(credit_score,loan_amount,annual_income,int_rate):
         if(0<=credit_score<=900  and loan_amount>=0 and annual_income>=0 and int_rate>=0):
