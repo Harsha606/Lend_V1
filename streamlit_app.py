@@ -203,31 +203,21 @@ if selected_opt == 'Recommendation App':
             st.markdown("<center><b>{}</b></center>".format(res[0]),unsafe_allow_html=True)
             st.image(imgs[res[0]])
 if selected_opt=='Segmentation':
-    table_name = 'LENDINGAI_DB.MART.TBL_KMEANS_SEGMENTATION2'
-    df = session.table(table_name)
-    selected_term = 'Select Term'
-    selected_purpose = 'Select Purpose'
-    selected_home_ownership = 'Select Home Ownership'
-    #selected_debt_settlement_flag = 'Select Debt Settlement Flag'
-    selected_cluster = 'Select cluster'
-    distinct_clusters_df = df.select("CLUSTERS").distinct()
-    distinct_cluster = [row["CLUSTERS"] for row in distinct_clusters_df.collect()]
-    distinct_cluster.insert(0, "All Clusters")
-    distinct_term = pd.DataFrame(df.select("TERM").distinct().collect())
-    distinct_purpose = pd.DataFrame(df.select("PURPOSE").distinct().collect())
-    distinct_home_ownership = pd.DataFrame(df.select("HOME_OWNERSHIP").distinct().collect())
+    #table_name = 'LENDINGAI.SOURCE.TBL_KMEANS'
+    #st.dataframe(df)
     # Create a row with three columns
     col1, col2, col3 = st.columns(3)
+    
     # Column 1: Filters
     with col1:
-        selected_term = st.selectbox('Loan Repayment Term:', distinct_term)
-        selected_home_ownership = st.selectbox('Current Home Ownership Status:', distinct_home_ownership)
+        selected_term = st.selectbox('Term:',["60 months","36 months"] )
+        selected_home_ownership = st.selectbox('Home Ownership:', ["RENT","MORTGAGE","ANY","OWN","NONE"])
     with col2:
-        annual_income_input = st.number_input('Annual Income:', min_value=0,value=100000)
-        loan_amount_input = st.number_input('Loan Amount:', min_value=0,value=1000)
+        annual_income_input = st.number_input('Annual Income:', min_value=0)
+        loan_amount_input = st.number_input('Loan Amount:', min_value=0)
     with col3:
-        selected_purpose = st.selectbox('Type of Loan:', distinct_purpose)
-        selected_cluster = st.selectbox('Select Cluster:', distinct_cluster)
+        selected_purpose = st.selectbox('Purpose:', ["house","medical","vacation","moving","credit_card","home_improvement","small_business","major_purchase","car","renewable_energy","wedding","debt_consolidation","educational","other"])
+        selected_cluster = st.selectbox('Clusters:', ["All Clusters",0,1,2,3,4])
         #selected_debt_settlement_flag = st.selectbox('Debt Settlement Flag:', distinct_debt_settlement_flag)
     if 1 <= loan_amount_input <= 10000:
         min_value = 1
@@ -243,7 +233,8 @@ if selected_opt=='Segmentation':
         max_value = 40000
     else:
         min_value = 40001  # Default to more than 40K
-        max_value = 45000  # Set a very large value for the upper limi
+        max_value = 45000  # Set a very large value for the upper limit
+    
     if 0 <= annual_income_input <= 100000:
         min_income = 0
         max_income = 100000
@@ -258,158 +249,81 @@ if selected_opt=='Segmentation':
         max_income = 400000
     else:
         min_income = 400001  # Default to more than 4L
-        max_income = 600000  # Set a very large value for the upper limi
+        max_income = 600000  # Set a very large value for the upper limit
     # Create a button to apply the filter
-    col11,col12,col13,col14,col15=st.columns(5)
-    with col13:
-        for _ in range(2):
-            st.write("")
-        btn1=st.button('Submit',key='button_cntr8')
-    if btn1:
+    if st.button("Submit"):
+        table_name = session.sql('SELECT * FROM LENDINGAI_DB.MART.TBL_KMEANS_SEGMENTATION2').collect()
+        df = pd.DataFrame(table_name)
+        df['ANNUAL_INC']=pd.to_numeric(df['ANNUAL_INC'], errors='coerce')
+        df=df.dropna(subset=['ANNUAL_INC'])
+        condition1 = df['TERM']==selected_term
+        condition2 = (min_value <= df['LOAN_AMNT']) & (df['LOAN_AMNT'] <= max_value)
+        condition3 = (min_income <= df['ANNUAL_INC']) & (df['ANNUAL_INC'] <= max_income)
+        condition4 = df['PURPOSE']==selected_purpose
+        condition5 =  df['HOME_OWNERSHIP']==selected_home_ownership
+        condition6 = df['CLUSTERS'] == selected_cluster        
         # Check if the selected filter values are not the default values before creating the query
         if selected_term != 'Select Term' and selected_home_ownership != 'Select Home Ownership':
             # Create a query based on all selected filters and the loan amount and annual income inputs
             if selected_cluster == "All Clusters":
-                query = f'SELECT  count(*) as "Approved Applications" FROM {table_name} WHERE ' \
-                        f'"LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value} ' \
-                        f'AND "TERM" = \'{selected_term}\' AND "HOME_OWNERSHIP" = \'{selected_home_ownership}\' ' \
-                        f'AND "ANNUAL_INC" >= {min_income} AND "ANNUAL_INC" <= {max_income}' \
-                        f'AND "PURPOSE" = \'{selected_purpose}\''
-                count_result = session.sql(query).collect()[0]
-                approved_applications_count = count_result["Approved Applications"]
-                st.write(f"Approved Applications: {approved_applications_count}")
                 # Create a query to select the table data within specified filters
-                table_query = f"""
-                    SELECT *
-                    FROM {table_name}
-                    WHERE "LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value}
-                    AND "TERM" = '{selected_term}' AND "HOME_OWNERSHIP" = '{selected_home_ownership}'
-                    AND "ANNUAL_INC" >= {min_income} AND "ANNUAL_INC" <= {max_income}
-                    AND "PURPOSE" = '{selected_purpose}'
-                    """
-                #Execute the table data query and get the count of rows
-                table_data = session.sql(table_query)
-                # Check if the Snowflake DataFrame has row
-                if table_data.count() > 0:
-                    st.write("Data Based on Filters:")
-                    selected_columns = [
-                        "TITLE","LOAN_STATUS", "EMP_LENGTH","INT_RATE",
-                        "TERM", "ACC_NOW_DELINQ","HOME_OWNERSHIP" ,"ANNUAL_INC", "AVG_CUR_BAL", "DELINQ_2YRS",
-                        "DTI", "LOAN_AMNT", "OPEN_ACC_6M", "TOTAL_BAL_EX_MORT", "TOTAL_BAL_IL",
-                        "TOTAL_PYMNT", "DEBT_SETTLEMENT_FLAG", "VERIFICATION_STATUS", "CLUSTERS"
-                    ]
-                    # Filter the DataFrame to keep only the selected column
-                    table_data1 = table_data.select(selected_columns).to_pandas()
-                    table_data2=pd.DataFrame(table_data1)
-                    # Display the filtered DataFrame
-                    st.dataframe(table_data2)  # Convert Snowflake DataFrame to Pandas for displa
-                # Corrected SQL query with a space before GROUP BY
-                query = f'SELECT "LOAN_STATUS", COUNT(*) as "Approved Applications" FROM {table_name} WHERE ' \
-                        f'"LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value} ' \
-                        f'AND "TERM" = \'{selected_term}\' AND "HOME_OWNERSHIP" = \'{selected_home_ownership}\' ' \
-                        f'AND "ANNUAL_INC" >= {min_income} AND "ANNUAL_INC" <= {max_income} '\
-                        f'AND "PURPOSE" = \'{selected_purpose}\''\
-                        f'GROUP BY "LOAN_STATUS"'
-                filtered_data = session.sql(query)
-                # Convert the filtered_data to a Pandas DataFrame
-                df = pd.DataFrame(filtered_data.to_pandas())
-                col8, col9 = st.columns(2)    
+                condition= condition1 & condition2 & condition3 & condition4 & condition5
+                df2=df[(condition)].reset_index(drop=True)
+                count_result = len(df2)
+                st.write(f"Approved Applications: {count_result}")
+                st.write("Table Data Based on Filters:")
+                st.dataframe(df2)
+                df3 = df2.groupby("LOAN_STATUS").size().reset_index(name="Approved Applications")
+                col8, col9 = st.columns(2)
                 # Create a bar graph with values displayed on top of bars
                 with col8:
-                    if not df.empty:
+                    if not df3.empty:
                         # Create a bar chart using Plotly
-                        fig = px.bar(df, x="LOAN_STATUS", y="Approved Applications", labels={"LOAN_STATUS": "Loan Status", "Approved Applications": "Approved Applications"})
+                        fig = px.bar(df3, x="LOAN_STATUS", y="Approved Applications", labels={"LOAN_STATUS": "Loan Status", "Approved Applications": "Approved Applications"})
                         fig.update_layout(
-                            title_text="Approved Applications by Loan Status",
+                            title_text="Bar Chart of Approved Applications by Loan Status",
                             title_font=dict(size=20, family="Arial"),  # Set title font size and family
                             xaxis_tickangle=-45  # Rotate x-axis labels for better readability
                         )
                         fig.update_traces(texttemplate='%{y}', textposition='outside')  # Add value annotations on top of each bar
                         st.plotly_chart(fig, use_container_width=True)
             else:
-                query = f'SELECT  count(*) as "Approved Applications" FROM {table_name} WHERE ' \
-                        f'"LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value} ' \
-                        f'AND "TERM" = \'{selected_term}\' AND "HOME_OWNERSHIP" = \'{selected_home_ownership}\' ' \
-                        f'AND "ANNUAL_INC" >= {min_income} AND "ANNUAL_INC" <= {max_income}' \
-                        f'AND "PURPOSE" = \'{selected_purpose}\''\
-                        f'AND "CLUSTERS"  = {selected_cluster}'
-                # Execute the filtered query and display the resul
-                # filtered_data = session.sql(query)
-                # Execute the count query and display the result
-                count_result = session.sql(query).collect()[0]
-                approved_applications_count = count_result["Approved Applications"]
-                st.write(f"Approved Applications: {approved_applications_count}")
-                # Create a query to select the table data within specified filters
-                table_query = f"""
-                    SELECT *
-                    FROM {table_name}
-                    WHERE "LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value}
-                    AND "TERM" = '{selected_term}' AND "HOME_OWNERSHIP" = '{selected_home_ownership}'
-                    AND "ANNUAL_INC" >= {min_income} AND "ANNUAL_INC" <= {max_income}
-                    AND "PURPOSE" = '{selected_purpose}'
-                    AND "CLUSTERS" = {selected_cluster}
-                    """
-                #Execute the table data query and get the count of rows
-                table_data = session.sql(table_query)
-                # Check if the Snowflake DataFrame has rows
-                if table_data.count() > 0:
-                    st.write("Table Data Based on Filters:")
-                    selected_columns = [
-                        "TITLE","LOAN_STATUS", "EMP_LENGTH","INT_RATE",
-                        "TERM", "ACC_NOW_DELINQ","HOME_OWNERSHIP" ,"ANNUAL_INC", "AVG_CUR_BAL", "DELINQ_2YRS",
-                        "DTI", "LOAN_AMNT", "OPEN_ACC_6M", "TOTAL_BAL_EX_MORT", "TOTAL_BAL_IL",
-                        "TOTAL_PYMNT", "DEBT_SETTLEMENT_FLAG", "VERIFICATION_STATUS", 'CLUSTERS'
-                    ]
-                    # Filter the DataFrame to keep only the selected columns
-                    table_data = table_data.select(selected_columns)
-                    # Display the filtered DataFrame
-                    dff=pd.DataFrame(table_data)
-                    st.datafrrame(dff)
-                  # Convert Snowflake DataFrame to Pandas for displa
-                # Corrected SQL query with a space before GROUP BY
-                query = f'SELECT "LOAN_STATUS", COUNT(*) as "Approved Applications" FROM {table_name} WHERE ' \
-                        f'"LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value} ' \
-                        f'AND "TERM" = \'{selected_term}\' AND "HOME_OWNERSHIP" = \'{selected_home_ownership}\' ' \
-                        f'AND "ANNUAL_INC" >= {min_income} AND "ANNUAL_INC" <= {max_income} '\
-                        f'AND "PURPOSE" = \'{selected_purpose}\''\
-                        f'AND "CLUSTERS"  = {selected_cluster} GROUP BY "LOAN_STATUS"'
-                filtered_data = session.sql(query)
-                # Convert the filtered_data to a Pandas DataFrame
-                df = pd.DataFrame(filtered_data.to_pandas())
+                condition= condition1 & condition2 & condition3 & condition4 & condition5 & condition6
+                df2=df[(condition)].reset_index(drop=True)
+                count_result = len(df2)
+                st.write(f"Approved Applications: {count_result}")
+                st.write("Table Data Based on Filters:")
+                st.dataframe(df2)
+                df3 = df2.groupby("LOAN_STATUS").size().reset_index(name="Approved Applications")
                 col8, col9 = st.columns(2)
                 # Create a bar graph with values displayed on top of bars
                 with col8:
-                    if not df.empty:
+                    if not df3.empty:
                         # Create a bar chart using Plotly
-                        fig = px.bar(df, x="LOAN_STATUS", y="Approved Applications", labels={"LOAN_STATUS": "Loan Status", "Approved Applications": "Approved Applications"})
+                        fig = px.bar(df3, x="LOAN_STATUS", y="Approved Applications", labels={"LOAN_STATUS": "Loan Status", "Approved Applications": "Approved Applications"})
                         fig.update_layout(
-                            title_text="Approved Applications by Loan Status",
-                            title_font=dict(size=20, family="Arial"),  # Set title font sizend family
+                            title_text="Bar Chart of Approved Applications by Loan Status",
+                            title_font=dict(size=20, family="Arial"),  # Set title font size and family
                             xaxis_tickangle=-45  # Rotate x-axis labels for better readability
                         )
                         fig.update_traces(texttemplate='%{y}', textposition='outside')  # Add value annotations on top of each bar
                         st.plotly_chart(fig, use_container_width=True)
-        # Create a pie chart with values displayed on hover
+        # Create a pie chart with values displayed on hove
         with col9:
-            # Corrected SQL query with a space before GROUP BY
-            query = f'SELECT "CLUSTERS", COUNT(*) as "Approved Applications" FROM {table_name} WHERE ' \
-                    f'"LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value} ' \
-                    f'AND "TERM" = \'{selected_term}\' AND "HOME_OWNERSHIP" = \'{selected_home_ownership}\' ' \
-                    f'AND "ANNUAL_INC" >= {min_income} AND "ANNUAL_INC" <= {max_income} '\
-                    f'AND "PURPOSE" = \'{selected_purpose}\' GROUP BY "CLUSTERS"'
-            filtered_data = session.sql(query)
-            # Convert the filtered_data to a Pandas DataFrame
-            df = pd.DataFrame(filtered_data.to_pandas())
+            condition= condition1 & condition2 & condition3 & condition4 & condition5
+            df4=df[(condition)].reset_index(drop=True)
+            df5 = df4.groupby("CLUSTERS").size().reset_index(name="Approved Applications")        
             # Create a pie chart using Plotly without custom colors
-            fig = px.pie(df, names='CLUSTERS', values='Approved Applications',
+            fig = px.pie(df5, names='CLUSTERS', values='Approved Applications',
                         hover_data=['CLUSTERS', 'Approved Applications'],
-                        labels={'CLUSTERS': 'Cluster'})
+                        labels={'CLUSTERS': 'CLUSTER'})
             # Customize the appearance of the chart
             fig.update_traces(textinfo='percent+label', textposition='inside', textfont_size=12)
-            fig.update_layout(title_text="Approved Applications by Clusters",title_font=dict(size=20, family="Arial"))
+            fig.update_layout(title_text="Pie Chart of Approved Applications by Clusters")
             # Display the interactive pie chart
             st.plotly_chart(fig, use_container_width=True)
-
+    else:
+        st.write("No data available for the selected filters.")
 if selected_opt == 'Applications Data':
     res = session.call('LENDINGAI_DB.MART.SP_APPLICATIONSCORE_LR_VALIDATIONPROC_SNOWPARK')
     col1, col2, col3 = st.columns(3)
