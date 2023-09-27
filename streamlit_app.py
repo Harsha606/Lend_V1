@@ -122,13 +122,14 @@ if selected_opt =='Defaulter App':
                     color_discrete_map = {'Yes': '#00A300', 'No': '#FF4500'},
                     labels={'x': 'Defaulter', 'y': 'Probability'})
                   fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
-                  fig.update_layout(title_text='Probability of Customer Defaulter',width=500)
+                  st.markdown("<center><b>{}</b></center>".format("Probability of Customer Defaulter"),unsafe_allow_html=True)
                   for _ in range(6):
                       st.write("")
                   st.plotly_chart(fig,use_container_width=True)
                 with col3:
-                  for _ in range(6):
+                  for _ in range(8):
                       st.write("")
+                  st.markdown("<center><b>{}</b></center>".format("Top 5 Features Influencing Prediction"),unsafe_allow_html=True)
                   st.image("defaulter_feat_imp.png",use_column_width="always")
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
