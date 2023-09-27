@@ -370,6 +370,32 @@ if selected_opt == 'Applications Data':
             return True
         return False
     with col2:
+      res1 = session.sql('CALL LENDINGAI_DB.BASE.SP_APPLICATIONSCORE_APPLICANTIONS_SNOWPARK()').collect()
+      app_df = pd.DataFrame(res1).iloc[:20]
+      final_appscore_df = app_df[['RISK_SCORE','DEBT_TO_INCOME_RATIO','EMPLOYMENT_LENGTH','LOAN_TITLE','AMOUNT_REQUESTED']]
+      fig2 = go.Figure(data=[go.Table(
+                    columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+                    header=dict(
+                        values=["<b>EMPLOYMENT LENGTH</b>", "<b>DEBT TO INCOME RATIO</b>", "<b>AMOUNT REQUESTED</b>", "<b>LOAN TITLE</b>", "<b>CREDIT SCORE</b>"],
+                        fill_color='#CDCDD6',
+                        font_color="#4C4C54",
+                        align=['center'],
+                        line_color='#ffffff',
+                        font_size=14,
+                        height=20
+                    ),
+                    cells=dict(values=[final_appscore_df.EMPLOYMENT_LENGTH,final_appscore_df.DEBT_TO_INCOME_RATIO,final_appscore_df.AMOUNT_REQUESTED,final_appscore_df.LOAN_TITLE,final_appscore_df.RISK_SCORE],fill_color = [['white','#f0f2f6']*3200], align=['center'], font_size = 12))])
+                    # Update the layout of the Plotly table
+      fig2.update_layout(
+                        autosize=False,
+                        width=970,
+                        height=600,
+                        margin=dict(l=0, r=0, b=0, t=0, pad=4),
+                        paper_bgcolor="#ffffff"
+                    )
+      st.subheader("List of Applications")
+      st.plotly_chart(fig2)
+      
       if btn4:
           if is_valid_data(risk_score, amount_requested):
               lst = [risk_score, debt_to_income_ratio,emp_length,loan_title,amount_requested]
@@ -380,10 +406,13 @@ if selected_opt == 'Applications Data':
               app_df = pd.DataFrame(res1)
           if application_status == "Approved":
                 app_df = app_df[app_df['APPLICATION_STATUS'] == 1]
+                st.subheader("List of Approved Applications")
           elif application_status == "Rejected":
                 app_df = app_df[app_df['APPLICATION_STATUS'] == 0]
+                st.subheader("List of Rejected Applications")
           elif application_status == "Both":
-                 app_df = app_df[(app_df['APPLICATION_STATUS'] == 1) | (app_df['APPLICATION_STATUS'] == 0)]
+                app_df = app_df[(app_df['APPLICATION_STATUS'] == 1) | (app_df['APPLICATION_STATUS'] == 0)]
+                st.subheader("List of Both Approved & Rejected Applications")
           final_appscore_df = app_df[['RISK_SCORE','DEBT_TO_INCOME_RATIO','EMPLOYMENT_LENGTH','LOAN_TITLE','AMOUNT_REQUESTED']]
           fig2 = go.Figure(data=[go.Table(
                     columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
@@ -405,7 +434,6 @@ if selected_opt == 'Applications Data':
                         margin=dict(l=0, r=0, b=0, t=0, pad=4),
                         paper_bgcolor="#ffffff"
                     )
-          st.subheader("List of Applications")
           st.plotly_chart(fig2)
 if selected_opt =='Churn Data':
     col1, col2 =st.columns([2.8,7.2])
