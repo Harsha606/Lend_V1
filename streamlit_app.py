@@ -127,17 +127,7 @@ if selected_opt =='Defaulter App':
                       st.write("")
                   st.plotly_chart(fig,use_container_width=True)
                 with col3:
-                  features=res[28:93].split(',')
-                  features[0]=features[0][1:]
-                  features[-1]=features[-1][:-1]
-                  importances=res[93:].split(',')
-                  importances[0]=importances[0][1:]
-                  importances[-1]=importances[-1][:-1]
-                  df = pd.DataFrame(list(zip(features,importances)),columns =["Features", "Importance"])
-                  fig = px.bar(df, x="Importance", y="Features", orientation='h')
-                  fig.update_layout(xaxis_range=[0.00,0.05])
-                  st.dataframe(df)
-                  st.plotly_chart(fig)
+                  st.image("defauter_feat_imp.png",use_container_width=True)
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
