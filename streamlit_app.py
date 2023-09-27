@@ -609,7 +609,7 @@ if selected_opt=='Defaulter Data':
         fig44 = go.Figure(data=[go.Table(
         columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
         header=dict(
-                      values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
+                      values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUAL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
                       fill_color='#CDCDD6',
                       font_color="#4C4C54",
                       align=['center'],
