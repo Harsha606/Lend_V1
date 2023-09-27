@@ -284,7 +284,7 @@ if selected_opt=='Segmentation':
                         fig = px.bar(df3, x="LOAN_STATUS", y="Approved Applications", labels={"LOAN_STATUS": "Loan Status", "Approved Applications": "Approved Applications"})
                         fig.update_layout(
                             title_text="Bar Chart of Approved Applications by Loan Status",
-                            title_font=dict(size=20, family="Arial"),  # Set title font size and family
+                            title_font=dict(size=20),  # Set title font size and family
                             xaxis_tickangle=-45  # Rotate x-axis labels for better readability
                         )
                         fig.update_traces(texttemplate='%{y}', textposition='outside')  # Add value annotations on top of each bar
@@ -318,7 +318,7 @@ if selected_opt=='Segmentation':
                         fig = px.bar(df3, x="LOAN_STATUS", y="Approved Applications", labels={"LOAN_STATUS": "Loan Status", "Approved Applications": "Approved Applications"})
                         fig.update_layout(
                             title_text="Approved Applications by Loan Status",
-                            title_font=dict(size=20, family="Arial"),  # Set title font size and family
+                            title_font=dict(size=20),  # Set title font size and family
                             xaxis_tickangle=-45  # Rotate x-axis labels for better readability
                         )
                         fig.update_traces(texttemplate='%{y}', textposition='outside')  # Add value annotations on top of each bar
