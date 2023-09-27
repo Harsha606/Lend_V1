@@ -367,7 +367,8 @@ if selected_opt == 'Applications Data':
         if (0 <= risk_score <= 1000 and amount_requested >= 0):
             return True
         return False
-    if btn4:
+    with col2:
+      if btn4:
           if is_valid_data(risk_score, amount_requested):
               lst = [risk_score, debt_to_income_ratio,emp_length,loan_title,amount_requested]
               df = pd.DataFrame([lst], columns=['RISK_SCORE','DEBT_TO_INCOME_RATIO','EMPLOYMENT_LENGTH','LOAN_TITLE','AMOUNT_REQUESTED'])
@@ -402,9 +403,7 @@ if selected_opt == 'Applications Data':
                         margin=dict(l=0, r=0, b=0, t=0, pad=4),
                         paper_bgcolor="#ffffff"
                     )
-        
-          with col2:
-            st.plotly_chart(fig2)
+          st.plotly_chart(fig2)
 if selected_opt =='Churn Data':
     col1, col2 ,col3= st.columns(3)
     with col1:
