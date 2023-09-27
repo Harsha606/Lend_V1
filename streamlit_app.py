@@ -362,7 +362,9 @@ if selected_opt=='Segmentation':
                     # Filter the DataFrame to keep only the selected columns
                     table_data = table_data.select(selected_columns)
                     # Display the filtered DataFrame
-                    st.write(table_data.to_pandas())  # Convert Snowflake DataFrame to Pandas for displa
+                    dff=pd.DataFrame(table_data)
+                    st.datafrrame(dff)
+                  # Convert Snowflake DataFrame to Pandas for displa
                 # Corrected SQL query with a space before GROUP BY
                 query = f'SELECT "LOAN_STATUS", COUNT(*) as "Approved Applications" FROM {table_name} WHERE ' \
                         f'"LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value} ' \
