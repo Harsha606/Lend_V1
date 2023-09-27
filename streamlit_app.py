@@ -45,7 +45,7 @@ if selected_opt == 'Predictor App':
             age = st.selectbox('Age:', ['< 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
             amount_requested = st.number_input('Loan Amount:', min_value=0,value=1000)
             tenure = st.selectbox('Loan Repayment Tenure:', ['36 Months','60 Months'])
-    col111,col112,col112,coll13=st.columns([1,1,1,7)
+    col111,col112,col112,coll13=st.columns([1,1,1,7])
     with col112:
             btn=st.button("Predict")
     with col2:
