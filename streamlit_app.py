@@ -81,7 +81,7 @@ if selected_opt =='Defaulter App':
     with col1:
             loan_amnt = st.number_input('Loan Amount:',value=10000)
             home_ownership = st.selectbox('Home Ownership:',('OWN', 'RENT', 'MORTGAGE','ANY'))
-            annual_income = st.number_input('Annnual Income:', value=120000)
+            annual_income = st.number_input('Annual Income:', value=120000)
             loan_type = st.selectbox('Type of Loan:',
             ('Credit card refinancing','Debt consolidation','Home improvement','Major purchase','Business','Medical expenses','Moving and relocation','Vacation','Home buying','Green loan','Car financing','Other'))
             int_rate=st.number_input('Interest Rate:',value=10)
@@ -127,7 +127,7 @@ if selected_opt =='Defaulter App':
                       st.write("")
                   st.plotly_chart(fig,use_container_width=True)
                 with col3:
-                  st.image("defaulter_feat_imp.png",use_container_width=True)
+                  st.image("defaulter_feat_imp.png",use_column_width=True)
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
