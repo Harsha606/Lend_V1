@@ -134,7 +134,7 @@ if selected_opt =='Defaulter App':
                   importances[0]=importances[0][1:]
                   importances[-1]=importances[-1][:-1]
                   feature_names, importances = features,importances
-                  st.bar_chart(x=feature_names=y=importances)        
+                  st.bar_chart(x=feature_names,y=importances)        
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
