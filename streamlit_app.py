@@ -133,8 +133,8 @@ if selected_opt =='Defaulter App':
                   importances=res[91:].split(',')
                   importances[0]=importances[0][1:]
                   importances[-1]=importances[-1][:-1]
-                  feature_names, importances = features,importances
-                  st.bar_chart(x=feature_names,y=importances)        
+                  df = pd.DataFrame(list(zip(features,importances)),columns =['Features', 'Importance'])
+                  st.bar_chart(df,x="Features",y="Importance")        
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
