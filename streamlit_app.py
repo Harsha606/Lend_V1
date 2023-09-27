@@ -77,7 +77,7 @@ if selected_opt == 'Predictor App':
             st.markdown("<center><b>Probability of Loan Approval</b></center>",unsafe_allow_html=True)
             st.plotly_chart(fig,use_container_width=True)
 if selected_opt =='Defaulter App':
-    col1, col2 col3=st.columns([2.8,3.6,3.6])
+    col1, col2, col3=st.columns([2.8,3.6,3.6])
     with col1:
             loan_amnt = st.number_input('Loan Amount:',value=10000)
             home_ownership = st.selectbox('Home Ownership:',('OWN', 'RENT', 'MORTGAGE','ANY'))
