@@ -307,22 +307,20 @@ if selected_opt=='Segmentation':
                         )
                         fig.update_traces(texttemplate='%{y}', textposition='outside')  # Add value annotations on top of each bar
                         st.plotly_chart(fig, use_container_width=True)
-        # Create a pie chart with values displayed on hove
-        with col9:
-            condition= condition1 & condition2 & condition3 & condition4 & condition5
-            df4=df[(condition)].reset_index(drop=True)
-            df5 = df4.groupby("CLUSTERS").size().reset_index(name="Approved Applications")        
-            # Create a pie chart using Plotly without custom colors
-            fig = px.pie(df5, names='CLUSTERS', values='Approved Applications',
-                        hover_data=['CLUSTERS', 'Approved Applications'],
-                        labels={'CLUSTERS': 'CLUSTER'})
-            # Customize the appearance of the chart
-            fig.update_traces(textinfo='percent+label', textposition='inside', textfont_size=20)
-            fig.update_layout(title_text="Approved Applications by Clusters")
-            # Display the interactive pie chart
-            st.plotly_chart(fig, use_container_width=True)
-    else:
-        st.write("No data available for the selected filters.")
+                # Create a pie chart with values displayed on hove
+                with col9:
+                    condition= condition1 & condition2 & condition3 & condition4 & condition5
+                    df4=df[(condition)].reset_index(drop=True)
+                    df5 = df4.groupby("CLUSTERS").size().reset_index(name="Approved Applications")        
+                    # Create a pie chart using Plotly without custom colors
+                    fig = px.pie(df5, names='CLUSTERS', values='Approved Applications',
+                                hover_data=['CLUSTERS', 'Approved Applications'],
+                                labels={'CLUSTERS': 'CLUSTER'})
+                    # Customize the appearance of the chart
+                    fig.update_traces(textinfo='percent+label', textposition='inside', textfont_size=20)
+                    fig.update_layout(title_text="Approved Applications by Clusters")
+                    # Display the interactive pie chart
+                    st.plotly_chart(fig, use_container_width=True)
 if selected_opt == 'Applications Data':
     res = session.call('LENDINGAI_DB.MART.SP_APPLICATIONSCORE_LR_VALIDATIONPROC_SNOWPARK')
     col1, col2, col3 = st.columns(3)
