@@ -455,7 +455,7 @@ if selected_opt =='Churn Data':
                 churned_df=df[df['LOAN_STATUS_BIN']==1]
                 final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
                 fig2 = go.Figure(data=[go.Table(
-                columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+                columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
                 header=dict(
                     values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
                     fill_color='#CDCDD6',
@@ -482,7 +482,7 @@ if selected_opt =='Churn Data':
                 churned_df=df[df['LOAN_STATUS_BIN']==0]
                 final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
                 fig3 = go.Figure(data=[go.Table(
-                columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+                columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
                 header=dict(
                     values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
                     fill_color='#CDCDD6',
@@ -508,7 +508,7 @@ if selected_opt =='Churn Data':
                 churned_df=pd.DataFrame(res)
                 final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
                 fig4 = go.Figure(data=[go.Table(
-                columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+                columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
                 header=dict(
                     values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
                     fill_color='#CDCDD6',
