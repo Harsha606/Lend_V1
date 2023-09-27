@@ -264,7 +264,7 @@ if selected_opt=='Segmentation':
     with col13:
         for _ in range(2):
             st.write("")
-        btn1=st.button(':blue[Submit]',key='button_cntr8',use_container_width=True)
+        btn1=st.button('Submit',key='button_cntr8')
     if btn1:
         # Check if the selected filter values are not the default values before creating the query
         if selected_term != 'Select Term' and selected_home_ownership != 'Select Home Ownership':
