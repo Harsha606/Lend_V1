@@ -128,20 +128,22 @@ if selected_opt =='Defaulter App':
                       st.write("")
                   st.plotly_chart(fig,use_container_width=True)
                 with col3:
-                  features=res[27:91].split(',')
+                  features=res[26:91].split(',')
                   features[0]=features[0][1:]
                   features[-1]=features[-1][:-1]
                   importances=res[91:].split(',')
                   importances[0]=importances[0][1:]
                   importances[-1]=importances[-1][:-1]
-                  df=pd.DataFrame(list(zip(features,importances)),columns=['Features','Importance'])
-                  fig = px.bar(df, x="Importance", y="Features", orientation='h')
-                  fig.update_traces(marker_line_color='black', marker_line_width=1,hovertemplate=None)
-                  fig.update_layout(title_text='Top 5 Features Influencing Prediction',width=500)
-                  fig.update_layout(yaxis=dict(autorange="reversed"))
-                  for _ in range(6):
-                      st.write("")
-                  st.plotly_chart(fig,use_container_width=True)
+                  feature_names, importances = features,importances
+                  # Create a vertical bar plot for feature importances
+                  plt.figure(figsize=(10, 6))
+                  plt.barh(range(len(feature_names)), importances, align='center')
+                  plt.yticks(range(len(feature_names)), feature_names)
+                  plt.xlabel('Feature Importance')
+                  plt.ylabel('Feature')
+                  plt.title('Variable Importance')
+                  plt.gca().invert_yaxis()  # Invert the y-axis to show the most important features at the top
+                  st.pyplot(plt)
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
 if selected_opt == 'Recommendation App':
