@@ -141,6 +141,7 @@ if selected_opt =='Defaulter App':
                   plt.yticks(range(len(feature_names)), feature_names)
                   plt.xlabel('Feature Importance')
                   plt.ylabel('Feature')
+                  plt.xlim(0, 1)
                   plt.title('Variable Importance')
                   #plt.gca().invert_yaxis()  # Invert the y-axis to show the most important features at the top
                   st.pyplot(plt)
