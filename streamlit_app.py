@@ -408,7 +408,7 @@ if selected_opt == 'Applications Data':
           st.subheader("List of Applications")
           st.plotly_chart(fig2)
 if selected_opt =='Churn Data':
-    col1, col2 =st.colums([2.8,7.2])
+    col1, col2 =st.columns([2.8,7.2])
     with col1:
       loan_amnt = st.number_input('Loan Amount:',value=10000)
       home_ownership = st.selectbox('Type of Home Ownership:',('OWN', 'RENT', 'MORTGAGE','ANY'))
