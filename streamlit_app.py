@@ -147,7 +147,7 @@ if selected_opt == 'Recommendation App':
     transform_df = session.sql('SELECT * FROM LENDINGAI_DB.BASE.TBL_ID_TABLE;').collect()
     # Convert Snowflake DataFrames to pandas DataFrames
     trans_id_data = pd.DataFrame(transform_df)
-    data=trans_id_data['id'].iloc[:1000]
+    data=trans_id_data['id'].iloc[:10000]
     col1,col2,col3=st.columns(3)
     with col2:
             # Create the dropdown
@@ -202,10 +202,10 @@ if selected_opt == 'Recommendation App':
         with col5:
             st.write("")
             st.write("Recommended Loan(s):")
-            col11,col12,col13=st.columns([1,3,1])
-            with col12:
-                st.markdown("<center><b>{}</b></center>".format(res[0]),unsafe_allow_html=True)
-                st.image(imgs[res[0]])
+        col11,col12,col13=st.columns([1,3,1])
+        with col12:
+            st.markdown("<center><b>{}</b></center>".format(res[0]),unsafe_allow_html=True)
+            st.image(imgs[res[0]])
 if selected_opt == 'Applications Data':
     res = session.call('LENDINGAI_DB.MART.SP_APPLICATIONSCORE_LR_VALIDATIONPROC_SNOWPARK')
     col1, col2, col3 = st.columns(3)
