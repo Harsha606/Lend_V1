@@ -234,7 +234,6 @@ if selected_opt=='Segmentation':
     else:
         min_value = 40001  # Default to more than 40K
         max_value = 45000  # Set a very large value for the upper limit
-    
     if 0 <= annual_income_input <= 100000:
         min_income = 0
         max_income = 100000
@@ -302,7 +301,7 @@ if selected_opt=='Segmentation':
                         # Create a bar chart using Plotly
                         fig = px.bar(df3, x="LOAN_STATUS", y="Approved Applications", labels={"LOAN_STATUS": "Loan Status", "Approved Applications": "Approved Applications"})
                         fig.update_layout(
-                            title_text="Bar Chart of Approved Applications by Loan Status",
+                            title_text="Approved Applications by Loan Status",
                             title_font=dict(size=20, family="Arial"),  # Set title font size and family
                             xaxis_tickangle=-45  # Rotate x-axis labels for better readability
                         )
@@ -318,8 +317,8 @@ if selected_opt=='Segmentation':
                         hover_data=['CLUSTERS', 'Approved Applications'],
                         labels={'CLUSTERS': 'CLUSTER'})
             # Customize the appearance of the chart
-            fig.update_traces(textinfo='percent+label', textposition='inside', textfont_size=12)
-            fig.update_layout(title_text="Pie Chart of Approved Applications by Clusters")
+            fig.update_traces(textinfo='percent+label', textposition='inside', textfont_size=20)
+            fig.update_layout(title_text="Approved Applications by Clusters")
             # Display the interactive pie chart
             st.plotly_chart(fig, use_container_width=True)
     else:
