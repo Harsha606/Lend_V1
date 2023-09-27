@@ -564,7 +564,6 @@ if selected_opt=='Defaulter Data':
                 )
                 st.subheader("List of Both Defaulted and Successful Applications")
                 st.plotly_chart(fig4)
-      st.markdown("<b>Copyright (c) Anblicks Inc.  </b><a href='https://www.anblicks.com'>https://www.anblicks.com</a></div>", unsafe_allow_html=True)
       else:
         st.error("Invalid Data")
   
