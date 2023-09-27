@@ -344,7 +344,8 @@ if selected_opt == 'Applications Data':
         application_status = st.selectbox("Select the application status", ['Approved', 'Rejected','Both'], key="application_status")
         age = st.selectbox('Age:', ['0-18', '18-24', '25-34', '35-44', '45-54', '55-64', '65+'])
         tenure = st.selectbox('Loan Repayment Tenure:', ['36 Months','60 Months'])
-        btn4=st.button('Retrieve Related Applications',key='button_cntr2')
+    col11,col12,col13,col14=st.columns([0.4,2.0,0.4,7.2])    
+      btn4=st.button('Retrieve Related Applications',key='button_cntr2')
     # Predict
     if risk_score == 0:  # assuming default value of the input is 0 when nothing is entered
         risk_score = 624
