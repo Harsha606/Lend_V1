@@ -91,7 +91,7 @@ if selected_opt =='Defaulter App':
             term = st.radio("Loan Repayment Term:",["36 months", "60 months"],horizontal=True)
             Employee_Expe = ["< 1 year","2 years","3 years","4 years","5 years","6 years","7 years","8 years","9 years","10+ years"]
             emp_lengt = st.select_slider('Experience:', options=Employee_Expe)
-    col111,col112,col113,col114=st.columns([0.8,0.4,0.8,8])
+    col111,col112,col113,col114=st.columns([0.6,0.8,0.6,8])
     with col112:
             btn=st.button("Check")
     def is_valid_data2(credit_score,loan_amnt,annual_income,int_rate):
