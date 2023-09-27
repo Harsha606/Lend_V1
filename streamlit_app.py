@@ -207,7 +207,6 @@ if selected_opt=='Segmentation':
     #st.dataframe(df)
     # Create a row with three columns
     col1, col2, col3 = st.columns(3)
-    
     # Column 1: Filters
     with col1:
         selected_term = st.selectbox('Term:',["60 months","36 months"] )
@@ -286,7 +285,7 @@ if selected_opt=='Segmentation':
                         fig.update_layout(
                             xaxis_tickangle=-45  # Rotate x-axis labels for better readability
                         )
-                        fig.update_traces(texttemplate='%{y}', textposition='outside')  # Add value annotations on top of each bar
+                        fig.update_traces(texttemplate='%{y}')  # Add value annotations on top of each bar
                         st.plotly_chart(fig, use_container_width=True)
                 with col9:
                     condition= condition1 & condition2 & condition3 & condition4 & condition5
@@ -297,9 +296,9 @@ if selected_opt=='Segmentation':
                                 hover_data=['CLUSTERS', 'Approved Applications'],
                                 labels={'CLUSTERS': 'CLUSTER'})
                     # Customize the appearance of the chart
-                    fig.update_traces(textinfo='percent+label', textposition='inside', textfont_size=20)
-                    fig.update_layout(title_text="Approved Applications by Clusters")
+                    fig.update_traces(textinfo='label', textposition='inside', textfont_size=20)
                     # Display the interactive pie chart
+                    st.write("Approved Applications by Clusters")
                     st.plotly_chart(fig, use_container_width=True)
             else:
                 condition= condition1 & condition2 & condition3 & condition4 & condition5 & condition6
@@ -332,7 +331,7 @@ if selected_opt=='Segmentation':
                                 labels={'CLUSTERS': 'CLUSTER'})
                     # Customize the appearance of the chart
                     fig.update_traces(textinfo='percent+label', textposition='inside', textfont_size=20)
-                    fig.update_layout(title_text="Approved Applications by Clusters")
+                    st.write("Approved Applications by Clusters")
                     # Display the interactive pie chart
                     st.plotly_chart(fig, use_container_width=True)
 if selected_opt == 'Applications Data':
