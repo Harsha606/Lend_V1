@@ -146,7 +146,7 @@ if selected_opt == 'Recommendation App':
     # Get data from Snowflake for the tables
     transform_df = session.sql('SELECT * FROM LENDINGAI_DB.BASE.TBL_ID_TABLE;').collect()
     # Convert Snowflake DataFrames to pandas DataFrames
-    trans_id_data = pd.DataFrame(tranform_df)
+    trans_id_data = pd.DataFrame(transform_df)
     data=trans_id_data['id'].iloc[:1000]
     col1,col2,col3=st.columns(3)
     with col2:
