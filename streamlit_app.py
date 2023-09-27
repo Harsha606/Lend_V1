@@ -128,10 +128,10 @@ if selected_opt =='Defaulter App':
                       st.write("")
                   st.plotly_chart(fig,use_container_width=True)
                 with col3:
-                  features=res[28:93].split(',')
+                  features=res[27:91].split(',')
                   features[0]=features[0][1:]
                   features[-1]=features[-1][:-1]
-                  importances=res[93:].split(',')
+                  importances=res[91:].split(',')
                   importances[0]=importances[0][1:]
                   importances[-1]=importances[-1][:-1]
                   df=pd.DataFrame(list(zip(features,importances)),columns=['Features','Importance'])
