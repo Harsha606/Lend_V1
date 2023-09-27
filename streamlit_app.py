@@ -135,6 +135,7 @@ if selected_opt =='Defaulter App':
                   importances[-1]=importances[-1][:-1]
                   df = pd.DataFrame(list(zip(features,importances)),columns =["Features", "Importance"])
                   fig = px.bar(df, x="Importance", y="Features", orientation='h')
+                  st.dataframe(df)
                   st.plotly_chart(fig)
           else:
             st.error("Entered Invalid data, Please check your Inputs...")
