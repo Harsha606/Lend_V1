@@ -571,11 +571,11 @@ if selected_opt=='Defaulter Data':
             snow_df=session.create_dataframe(df)
             snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_DEFAULTER_VALIDATION_DS")
             res=session.sql('CALL LENDINGAI_DB.BASE.SP_DEFAULTER_APPLICATIONS()').collect()
-                churned_df=pd.DataFrame(res).iloc[:20]
-                final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
-                fig4 = go.Figure(data=[go.Table(
-                columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
-                header=dict(
+            churned_df=pd.DataFrame(res).iloc[:20]
+            final_churned_df=churned_df[['EMP_LENGTH', 'INT_RATE', 'LOAN_AMNT', 'TERM', 'HOME_OWNERSHIP', 'ANNUAL_INC', 'TITLE','RISK_SCORE']]
+            fig44 = go.Figure(data=[go.Table(
+            columnwidth=[2.5, 1.5, 2.5, 2.5, 3.0, 2.5, 2.5],
+            header=dict(
                     values=["<b>EMP_LENGTH</b>", "<b>INT_RATE</b>", "<b>LOAN_AMNT</b>", "<b>TERM</b>", "<b>HOME_OWNERSHIP</b>","<b>ANNUL_INC</b>", "<b>TITLE</b>","<b>CREDIT SCORE</b>"],
                     fill_color='#CDCDD6',
                     font_color="#4C4C54",
@@ -586,15 +586,15 @@ if selected_opt=='Defaulter Data':
                 ),
                 cells=dict(values=[final_churned_df.EMP_LENGTH,final_churned_df.INT_RATE,final_churned_df.LOAN_AMNT,final_churned_df.TERM,final_churned_df.HOME_OWNERSHIP,final_churned_df.ANNUAL_INC,final_churned_df.TITLE,final_churned_df.RISK_SCORE],fill_color = [['white','#f0f2f6']*3200], align=['center'], font_size = 12))])
                 # Update the layout of the Plotly table
-                fig4.update_layout(
+            fig44.update_layout(
                     autosize=False,
                     width=970,
                     height=600,
                     margin=dict(l=0, r=0, b=0, t=0, pad=4),
                     paper_bgcolor="#ffffff"
                 )
-                st.subheader("List of Both Defaulted and Successful Applications")
-                st.plotly_chart(fig4)
+            st.subheader("List of Both Defaulted and Successful Applications")
+            st.plotly_chart(fig44)
             if appln_type== 'None':
                 st.write("")
             elif appln_type=='Retrieve Defaulted Applications ':
