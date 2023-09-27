@@ -564,6 +564,6 @@ if selected_opt=='Defaulter Data':
                 )
                 st.subheader("List of Both Defaulted and Successful Applications")
                 st.plotly_chart(fig4)
-      else:
-        st.error("Invalid Data")
+        else:
+          st.error("Invalid Data")
   
