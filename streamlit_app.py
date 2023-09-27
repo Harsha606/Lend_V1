@@ -371,23 +371,22 @@ if selected_opt == 'Applications Data':
     col111,col112,col113,coll14=st.columns([1.2,0.8,1,7])
     with col112:
       btn4=st.button('Retrieve Related Applications',key='button_cntr2')
-    with col2:
-      if btn4:
-        if is_valid_data(risk_score, amount_requested):
-            lst = [risk_score, debt_to_income_ratio,emp_length,loan_title,amount_requested]
-            df = pd.DataFrame([lst], columns=['RISK_SCORE','DEBT_TO_INCOME_RATIO','EMPLOYMENT_LENGTH','LOAN_TITLE','AMOUNT_REQUESTED'])
-            snow_df = session.create_dataframe(df)
-            snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_APPLICATIONSCORE_APPLICATIONS_SNOWPARK")
-            res1 = session.sql('CALL LENDINGAI_DB.BASE.SP_APPLICATIONSCORE_APPLICANTIONS_SNOWPARK()').collect()
-            app_df = pd.DataFrame(res1)
-        if application_status == "Approved":
+    if btn4:
+      if is_valid_data(risk_score, amount_requested):
+          lst = [risk_score, debt_to_income_ratio,emp_length,loan_title,amount_requested]
+          df = pd.DataFrame([lst], columns=['RISK_SCORE','DEBT_TO_INCOME_RATIO','EMPLOYMENT_LENGTH','LOAN_TITLE','AMOUNT_REQUESTED'])
+          snow_df = session.create_dataframe(df)
+          snow_df.write.mode("overwrite").saveAsTable("LENDINGAI_DB.BASE.TBL_APPLICATIONSCORE_APPLICATIONS_SNOWPARK")
+          res1 = session.sql('CALL LENDINGAI_DB.BASE.SP_APPLICATIONSCORE_APPLICANTIONS_SNOWPARK()').collect()
+          app_df = pd.DataFrame(res1)
+      if application_status == "Approved":
             app_df = app_df[app_df['APPLICATION_STATUS'] == 1]
-        elif application_status == "Rejected":
+      elif application_status == "Rejected":
             app_df = app_df[app_df['APPLICATION_STATUS'] == 0]
-        elif application_status == "Both":
+      elif application_status == "Both":
              app_df = app_df[(app_df['APPLICATION_STATUS'] == 1) | (app_df['APPLICATION_STATUS'] == 0)]
-        final_appscore_df = app_df[['RISK_SCORE','DEBT_TO_INCOME_RATIO','EMPLOYMENT_LENGTH','LOAN_TITLE','AMOUNT_REQUESTED']]
-        fig2 = go.Figure(data=[go.Table(
+      final_appscore_df = app_df[['RISK_SCORE','DEBT_TO_INCOME_RATIO','EMPLOYMENT_LENGTH','LOAN_TITLE','AMOUNT_REQUESTED']]
+      fig2 = go.Figure(data=[go.Table(
                 columnwidth=[2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
                 header=dict(
                     values=["<b>EMPLOYMENT LENGTH</b>", "<b>DEBT TO INCOME RATIO</b>", "<b>AMOUNT REQUESTED</b>", "<b>LOAN TITLE</b>", "<b>CREDIT SCORE</b>"],
@@ -400,13 +399,14 @@ if selected_opt == 'Applications Data':
                 ),
                 cells=dict(values=[final_appscore_df.EMPLOYMENT_LENGTH,final_appscore_df.DEBT_TO_INCOME_RATIO,final_appscore_df.AMOUNT_REQUESTED,final_appscore_df.LOAN_TITLE,final_appscore_df.RISK_SCORE],fill_color = [['white','#f0f2f6']*3200], align=['center'], font_size = 12))])
                 # Update the layout of the Plotly table
-        fig2.update_layout(
+      fig2.update_layout(
                     autosize=False,
                     width=1000,
                     height=400,
                     margin=dict(l=0, r=0, b=0, t=0, pad=4),
                     paper_bgcolor="#ffffff"
                 )
+      with col2:
         st.subheader("List of Applications")
         st.plotly_chart(fig2)
 if selected_opt =='Churn Data':
