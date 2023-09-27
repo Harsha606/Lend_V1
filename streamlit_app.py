@@ -299,9 +299,10 @@ if selected_opt=='Segmentation':
                         "TOTAL_PYMNT", "DEBT_SETTLEMENT_FLAG", "VERIFICATION_STATUS", "CLUSTERS"
                     ]
                     # Filter the DataFrame to keep only the selected column
-                    table_data = table_data.select(selected_columns).to_pandas()
+                    table_data1 = table_data.select(selected_columns).to_pandas()
+                    table_data2=pd.DataFrame(table_data1)
                     # Display the filtered DataFrame
-                    st.dataframe(table_data,hide_index=True)  # Convert Snowflake DataFrame to Pandas for displa
+                    st.dataframe(table_data)  # Convert Snowflake DataFrame to Pandas for displa
                 # Corrected SQL query with a space before GROUP BY
                 query = f'SELECT "LOAN_STATUS", COUNT(*) as "Approved Applications" FROM {table_name} WHERE ' \
                         f'"LOAN_AMNT" >= {min_value} AND "LOAN_AMNT" <= {max_value} ' \
