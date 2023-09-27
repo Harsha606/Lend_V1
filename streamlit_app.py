@@ -130,7 +130,7 @@ if selected_opt =='Defaulter App':
                   for _ in range(6):
                       st.write("")
                   st.markdown("<center><b>{}</b></center>".format("Top 5 Features Influencing Prediction"),unsafe_allow_html=True)
-                  for _ in range(3):
+                  for _ in range(5):
                       st.write("")
                   st.image("defaulter_feat_imp.png",use_column_width="always")
           else:
