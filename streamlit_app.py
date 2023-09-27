@@ -398,12 +398,12 @@ if selected_opt == 'Applications Data':
                     # Update the layout of the Plotly table
           fig2.update_layout(
                         autosize=False,
-                        width=950,
+                        width=960,
                         height=500,
                         margin=dict(l=0, r=0, b=0, t=0, pad=4),
                         paper_bgcolor="#ffffff"
                     )
-          for _ in range(3):
+          for _ in range(4):
             st.write("")
           st.subheader("List of Applications")
           st.plotly_chart(fig2)
