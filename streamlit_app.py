@@ -207,11 +207,8 @@ if selected_opt == 'Recommendation App':
             st.markdown("<center><b>{}</b></center>".format(res[0]),unsafe_allow_html=True)
             st.image(imgs[res[0]])
 if selected_opt=='Segmentation':
-    #table_name = 'LENDINGAI.SOURCE.TBL_KMEANS'
-    #st.dataframe(df)
     # Create a row with three columns
     col1, col2, col3 = st.columns(3)
-    # Column 1: Filters
     with col1:
         selected_term = st.selectbox('Term:',["60 months","36 months"] )
         selected_home_ownership = st.selectbox('Home Ownership:', ["RENT","MORTGAGE","ANY","OWN","NONE"])
