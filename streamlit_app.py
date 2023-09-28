@@ -737,7 +737,7 @@ if selected_opt=='Defaulter Data':
         else:
           st.error("Invalid Data")
 st.markdown("""
-<footer style="text-align:center; padding: 10px;">
+<footer style="text-align:left; padding: 10px;">
     <div><b>Copyright (c) Anblicks Inc.  </b><a href='https://www.anblicks.com'>https://www.anblicks.com</a></div>
 </footer>
 """, unsafe_allow_html=True)        
