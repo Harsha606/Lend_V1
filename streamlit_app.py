@@ -736,5 +736,9 @@ if selected_opt=='Defaulter Data':
                 st.plotly_chart(fig4)
         else:
           st.error("Invalid Data")
-st.markdown("<div><b>Copyright (c) Anblicks Inc.  </b><a href='https://www.anblicks.com'>https://www.anblicks.com</a></div>", True)
+st.markdown("""
+<footer style="text-align:center; padding: 10px;">
+    <div><b>Copyright (c) Anblicks Inc.  </b><a href='https://www.anblicks.com'>https://www.anblicks.com</a></div>
+</footer>
+""", unsafe_allow_html=True)        
   
