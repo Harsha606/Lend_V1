@@ -14,7 +14,7 @@ st.set_page_config(page_title="LendingAI powered by Snowflake", page_icon="lendi
 st.image('LendingAI.png', width=220)
 st.markdown("""
 <style>
-    #Mainmenu,header,footer {visibility: hidden;}
+    #Mainmenu,header {visibility: hidden;}
     }
 </style>
 """,unsafe_allow_html=True)
